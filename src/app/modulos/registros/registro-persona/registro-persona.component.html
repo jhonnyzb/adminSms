@@ -1,0 +1,83 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="d-inline text-info h4"> Registro Persona</div>
+            <div class="d-inline  text-info float-right">
+                <button class="btn btn-info  mb-1" [disabled]="formularioRegister.invalid" [routerLink]="['/usuario/comunicacion', Contac,idtag]"><span
+                        class="fa fa-plus-square"></span>&nbsp;Crear Comunicación
+                </button>
+            </div>
+        </div>
+    </div><br><br>
+    <div class="row pl-2 pr-2">
+        <form [formGroup]="formularioRegister" class="w-100">
+            <div class="form-group">
+                <label for="">Nombre</label>
+                <input type="text" class="form-control" placeholder="Digite Nombre" formControlName="name">
+                <div *ngIf="getError('name')" class="alert alert-danger mt-1" role="alert">
+                    Campo Requerido
+                </div>
+            </div><br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputState">Pais</label>
+                    <select id="inputState" class="form-control" (change)="changePais($event)">
+                        <option value="" disabled>Elige un país</option>
+                        <option *ngFor="let pais of paises" [selected]="k == 43" [value]="pais.id">{{pais.nombre_pais_espanol}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">Telefono</label>
+                    <input type="text" class="form-control" formControlName="telefono">
+                    <div *ngIf="getError('telefono')" class="alert alert-dangesr mt-1" role="alert">
+                        Error de telefono
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div><br><br>
+    <div class="row pl-2 pr-2">
+        <div class="d-inline w-50 pt-2 pb-2 d-flex align-items-center">
+            <button class="btn btn-info btn-block" data-toggle="modal" data-target="#ModalTags">Tags</button>
+        </div>
+        <div class="pl-4 text-info">
+            <p><i class="fa fa-tags"></i></p>
+            <p>#Tags</p>
+        </div>
+        <div *ngIf="NumeroTags" class="ml-4 d-flex align-items-center">
+            {{NumeroTags}}
+        </div>
+    </div><br><br>
+    <div class="row pl-2 pr-2">
+        <button class="btn btn-info btn-block" [disabled]="formularioRegister.invalid" (click)="guardarRegister(formularioRegister)" >Agregar Persona</button>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="ModalTags" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar a Tag</h5>
+                <button type="button" class="close" data-dismiss="modal" (click)="limpiarArray()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-check">     
+                    <div class="row" >
+                            <div class="col-md-4 pt-3" *ngFor="let check of tags">
+                                <input type="checkbox" name= "miDataInterior" (change)="$event.target.checked ? agregar(check) : quitar(check)">&nbsp; {{check.nombre_tag}}
+                            </div>
+                    </div>            
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="limpiarArray()"  data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal" >Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>  

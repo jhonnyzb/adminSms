@@ -1,0 +1,21 @@
+.table .thead-dark th {
+    color: white;
+    background-color: #17a2b8;
+    border-color: #17a2b8
+
+}
+
+.cursor{
+    cursor: pointer;
+}
+.reauth-email{  
+    display: block;
+    color: red;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; 
+}

@@ -1,0 +1,120 @@
+<div id="page-top">
+    <div id="wrapper">
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark " id="accordionSidebar">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center">
+          <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fa fa-lock"></i>
+          </div>
+          <div class="sidebar-brand-text mx-3">Admin</div>
+        </a>
+        <hr class="sidebar-divider my-0">
+        <div class="sidebar-heading mt-3">
+           <p class="mb-0 h6" >AGREGAR PERSONAS</p>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/usuario']" routerLinkActive="active"  >
+            <i class="fa fa-users"></i>
+            <span>Masivos</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['personal']" routerLinkActive="active"  >
+            <i class="fa fa-user"></i>
+            <span>Individual</span></a>
+        </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading mt-3">
+          <p class="mb-0 h6" >FLUJOS </p>
+       </div>
+       <li class="nav-item">
+        <a class="nav-link" [routerLink]="['flow']" routerLinkActive="active"  >
+          <i class="fa fa-tags "></i>
+          <span>Flujo de comunicación</span></a>
+      </li>
+        <hr class="sidebar-divider">
+        <div class="sidebar-heading mt-3">
+          <p class="mb-0 h6" >REGISTROS TAGS</p>
+       </div>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['tags']" routerLinkActive="active"  >
+            <i class="fa fa-tags "></i>
+            <span>Tags</span></a>
+        </li>
+        <hr class="sidebar-divider d-none d-md-block">
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0 button-left " data-toggle="collapse" data-target="#accordionSidebar"
+            id="sidebarToggle"></button>
+        </div>
+      </ul>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <button id="sidebarToggleTop" class="btn btn-link  rounded-circle mr-3" data-toggle="collapse"
+              data-target="#accordionSidebar">
+              <i class="fa fa-bars"></i>
+            </button>
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+              <div class="input-group">
+                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                  aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="button">
+                    <i class="fa fa-search fa-sm"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="fa fa-search fa-fw"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right p-3 shadow"
+                  aria-labelledby="searchDropdown">
+                  <form class="form-inline mr-auto w-100 navbar-search">
+                    <div class="input-group">
+                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        aria-label="Search" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fa fa-search fa-sm"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </li>
+              <div class="topbar-divider d-none d-sm-block"></div>
+              <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                  <img class="img-profile rounded-circle" src="../../../assets/img/User-icon.png">
+                </a>
+  
+                <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="userDropdown">
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" >
+                    <i class="fa fa-sign-out mr-2" aria-hidden="true" ></i>
+                    Cerrar sesion
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+          <div class="container-fluid">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright &copy; Mi web site 2019</span>
+  
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </div>
+  

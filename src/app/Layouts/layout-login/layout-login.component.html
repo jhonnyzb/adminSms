@@ -1,0 +1,74 @@
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100">
+            <div class="login100-form-title" style="background-image: url(./assets/img/bg-01.jpg);">
+                <span class="login100-form-title-1">
+                    Inicio de sesión
+                </span>
+            </div>
+            <form class="ml-5 mr-5 mt-5 pb-5 " [formGroup]="formularioLogin" (ngSubmit)="onLogin(formularioLogin)">
+                <div class="form-group mt-5">
+                    <label>NOMBRE USUARIO </label>
+                    <input type="text" class="form-control" placeholder="Username" formControlName="userName">
+                    <div *ngIf="getError('userName')" class="alert alert-danger mt-1" role="alert">
+                        Campo Requerido
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label>CONTRASEÑA</label>
+                    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                    <div *ngIf="getError('password')" class="alert alert-danger mt-1" role="alert">
+                        Minimo {{minlength}} Caracteres
+                    </div>
+                </div>
+
+                <div class="form-check mt-5">
+                    <input type="checkbox" class="form-check-input">
+                    <label class="form-check-label">Recuerdame</label>
+                    <a class="float-right" data-toggle="modal" data-target="#ModalForgot">
+                        ¿Olvido su contraseña?
+                    </a>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-info btn-block" [disabled]="formularioLogin.invalid">Iniciar
+                        Sesión</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="ModalForgot" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-info">Recuperar Contraseña</h5>
+                <button class="close" (click)="clear(formularioReset)" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formularioReset">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label"> Su Contraseña sera enviada a su
+                            correo</label>
+                        <input type="text" class="form-control" placeholder="Ingrese correo"
+                            formControlName="mailReset">
+                        <div *ngIf="getErrorReset('mailReset')" class="alert alert-danger mt-1" role="alert">
+                            Email invalido
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button data-dismiss="modal" (click)="clear(formularioReset)"
+                            class="btn btn-secondary">Cerrar</button>
+                        <button type="submit" [disabled]="formularioReset.invalid" class="btn btn-info">Enviar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

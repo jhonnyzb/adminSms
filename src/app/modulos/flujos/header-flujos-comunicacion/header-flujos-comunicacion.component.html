@@ -1,0 +1,118 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <p class="h4 text-info">Crear flujo de comunicación</p>
+        </div>
+    </div>
+    <div class="row mt-3 ">
+        <div class="col-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active">Paso 1</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Paso 2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Paso 3</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Paso 4</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="accordion" id="accordionExample">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                                Selecciona un elemento
+                            </button>
+                        </h2>
+                    </div>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                        <div class="card-body">
+                            <form class="w-100">
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text fa fa-search pt-2"></span>
+                                    </div>
+                                    <input type="search" class="form-control" placeholder="Busqueda de opciones"
+                                        name="filterPeople">
+                                </div>
+                            </form>
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <p class="h6 text-info">CANALES</p>
+                                </div>
+                                <div class="col-6">
+                                    <hr class="bg-info">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
+                                        <a><span class="fa fa-comment fa-2x text-info mr-2"></span>Enviar Mensaje
+                                            SMS</a>
+                                    </div>
+                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
+                                        <a><span class="fa fa-whatsapp fa-2x text-info mr-2"></span>Enviar Mensaje
+                                            WhatsApp</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <p class="h6 text-info">IVR</p>
+                                </div>
+                                <div class="col-6">
+                                    <hr class="bg-info">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
+                                        <a><span class="fa fa-volume-control-phone fa-2x text-info mr-2"></span>Iniciar
+                                            llamada</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-6">
+                                    <p class="h6 text-info">Funciones</p>
+                                </div>
+                                <div class="col-6">
+                                    <hr class="bg-info">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
+                                        <a><span class="fa fa-mobile fa-2x text-info mr-2"></span>Evaluar Entrada
+                                            Mensaje</a>
+                                    </div>
+                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
+                                        <a><span class="fa fa-times fa-2x text-info mr-2"></span>Fin del flujo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                        <router-outlet></router-outlet>
+                </div>
+
+            </div>
+
+
+        </div>

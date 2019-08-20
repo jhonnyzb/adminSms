@@ -1,0 +1,100 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="d-inline h4"><i class="fa fa-phone-square text-info"></i> Crear Comunicación
+            </div>
+        </div><br><br>
+    </div>
+    <div class="row pl-2 pr-2">
+        <form class="w-100" [formGroup]="formularioComunicacion">
+            <div class="form-group">
+                <label> <i class="fa fa-share text-info"></i>Para</label>
+                <input type="text" class="form-control w-100 " disabled [value]="contac">
+            </div><br><br>
+            <div class="form-group">
+                <label><i class="fa fa-mail-reply text-info"></i>De</label>
+                <input type="text" class="form-control w-100 " formControlName="de" >
+            </div><br><br>
+            <div class="form-group">
+                <label> <i class="fa fa-address-card text-info"></i> Contenido del mensaje</label>
+                <label class="float-right"><small>1 mensaje / 160 caracteres</small> </label>
+                <textarea class="form-control " placeholder="" rows="8" formControlName="descripcion"></textarea>
+            </div>
+            <div class="border pl-2 mt-5 ">
+                <div class="d-flex align-items-center">
+                    <i class="fa fa-comments fa-4x text-info"></i>
+                    <input type="text" class="form-control w-50 ml-2" formControlName="nombreCampaña"
+                        placeholder="Nombre campaña">
+                    <div class="w-100 pr-2">
+                        <button class="btn btn-info float-right w-25"
+                            (click)="SendComunicacion(formularioComunicacion)" data-toggle="modal" data-target="#ModalReporte">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalReporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Reporte de envio </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" *ngIf="datarecibida" >
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fa fa-users fa-2x text-info"></i>
+                            <p style="margin-bottom: 0%"><small>Enviados</small></p>
+                            <p>{{datarecibida.cantidad_personas_enviadas}}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fa fa-arrows-h fa-2x text-info"></i>
+                            <p style="margin-bottom: 0%"><small>Trafico</small></p>
+                            <p>{{datarecibida.cantidad_sms_enviados}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <i class="fa fa-usd fa-2x text-info"></i>
+                            <p style="margin-bottom: 0%"><small>Costo Total</small></p>
+                            <p>{{datarecibida.precio_por_mensaje * datarecibida.cantidad_sms_enviados}} {{codigo_divisa}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">                     
+                            <label>Errores {{datarecibida.cantidad_personas_rechazadas}}</label>
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                                    style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>                   
+                    </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-12 ">                     
+                                <label>pendientes {{datarecibida.cantidad_personas_pendientes}}</label>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+                                        style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>                   
+                        </div>
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Obtener Reporte</button>
+            </div>
+        </div>
+    </div>
+</div>
