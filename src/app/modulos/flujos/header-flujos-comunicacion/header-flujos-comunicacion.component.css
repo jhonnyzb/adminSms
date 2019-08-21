@@ -1,6 +1,12 @@
-
-
 div.h:hover {
     background-color:#EDEDED;
     cursor: pointer;
-}   
+}  
+
+.card-header{
+    padding: 0;
+}
+
+.card-body{
+    padding-top: 5px;
+}

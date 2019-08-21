@@ -59,4 +59,37 @@ envioMensaje(envio){
   })
 }
 
+dataOpciones(){
+  let opciones = 
+  [ 
+    {
+      icon:'comment',
+      name: 'Enviar Mensaje SMS',
+      route: 'formsms'
+    },
+    {
+      icon:'mobile',
+      name: 'Evaluar Mensaje SMS',
+      route: 'formevasms'
+    },
+    {
+      icon:'whatsapp',
+      name: 'Enviar Mensaje WhatsApp',
+      route: ''
+    },
+    {
+      icon:'volume-control-phone',
+      name: 'Iniciar llamada',
+      route: ''
+    },
+    {
+      icon:'times',
+      name: 'Fin del flujo',
+      route: ''
+    },
+  ]
+
+  return opciones;
+}
+
 }

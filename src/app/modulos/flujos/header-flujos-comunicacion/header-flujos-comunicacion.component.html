@@ -1,10 +1,10 @@
 <div class="container">
-    <div class="row mt-5">
+    <div class="row mt-1">
         <div class="col-12">
             <p class="h4 text-info">Crear flujo de comunicación</p>
         </div>
     </div>
-    <div class="row mt-3 ">
+    <div class="row mt-1 ">
         <div class="col-12">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -38,7 +38,7 @@
                     <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                         <div class="card-body">
                             <form class="w-100">
-                                <div class="input-group mb-3">
+                                <div class="input-group ">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text fa fa-search pt-2"></span>
                                     </div>
@@ -48,7 +48,7 @@
                             </form>
                             <div class="row mt-4">
                                 <div class="col-6">
-                                    <p class="h6 text-info">CANALES</p>
+                                    <p class="h6 text-info">OPCIONES</p>
                                 </div>
                                 <div class="col-6">
                                     <hr class="bg-info">
@@ -56,49 +56,9 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
-                                        <a><span class="fa fa-comment fa-2x text-info mr-2"></span>Enviar Mensaje
-                                            SMS</a>
-                                    </div>
-                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
-                                        <a><span class="fa fa-whatsapp fa-2x text-info mr-2"></span>Enviar Mensaje
-                                            WhatsApp</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row mt-4">
-                                <div class="col-6">
-                                    <p class="h6 text-info">IVR</p>
-                                </div>
-                                <div class="col-6">
-                                    <hr class="bg-info">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
-                                        <a><span class="fa fa-volume-control-phone fa-2x text-info mr-2"></span>Iniciar
-                                            llamada</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-6">
-                                    <p class="h6 text-info">Funciones</p>
-                                </div>
-                                <div class="col-6">
-                                    <hr class="bg-info">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
-                                        <a><span class="fa fa-mobile fa-2x text-info mr-2"></span>Evaluar Entrada
-                                            Mensaje</a>
-                                    </div>
-                                    <div class="pt-2 pb-2 h pl-2" data-toggle="collapse" data-target="#collapseOne">
-                                        <a><span class="fa fa-times fa-2x text-info mr-2"></span>Fin del flujo</a>
+                                    <div class="pt-2 pb-2 h pl-2" *ngFor="let opcion of opciones" data-toggle="collapse"
+                                        data-target="#collapseOne" routerLink="{{opcion.route}}" routerLinkActive="router-link-active"  >
+                                        <a><span class="fa fa-{{opcion.icon}}  text-info mr-2"></span>{{opcion.name}}</a>
                                     </div>
                                 </div>
                             </div>
@@ -106,10 +66,10 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-12">
-                        <router-outlet></router-outlet>
+                    <router-outlet></router-outlet>
                 </div>
 
             </div>
