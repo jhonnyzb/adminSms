@@ -7,17 +7,8 @@
     <div class="row mt-1 ">
         <div class="col-12">
             <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active">Paso 1</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Paso 2</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Paso 3</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Paso 4</a>
+                <li class="nav-item" *ngFor="let tab of tabs">
+                    <a class="nav-link active">{{tab.paso}}</a>
                 </li>
             </ul>
         </div>
@@ -43,7 +34,7 @@
                                         <span class="input-group-text fa fa-search pt-2"></span>
                                     </div>
                                     <input type="search" class="form-control" placeholder="Busqueda de opciones"
-                                        name="filterPeople">
+                                        name="filterOpciones" [(ngModel)]="filterOpciones">
                                 </div>
                             </form>
                             <div class="row mt-4">
@@ -56,8 +47,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="pt-2 pb-2 h pl-2" *ngFor="let opcion of opciones" data-toggle="collapse"
-                                        data-target="#collapseOne" routerLink="{{opcion.route}}" routerLinkActive="router-link-active"  >
+                                    <div class="pt-2 pb-2 h pl-2"
+                                        *ngFor="let opcion of opciones | search: filterOpciones" data-toggle="collapse"
+                                        data-target="#collapseOne" routerLink="{{opcion.route}}"
+                                        routerLinkActive="router-link-active">
                                         <a><span class="fa fa-{{opcion.icon}}  text-info mr-2"></span>{{opcion.name}}</a>
                                     </div>
                                 </div>
@@ -65,14 +58,22 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br>
 
             <div class="row">
                 <div class="col-12">
-                    <router-outlet></router-outlet>
+                        <router-outlet></router-outlet>  
+                </div>
+                          
+            </div>
+            <div class="row mb-2">
+                <div class="col-12 ">
+                    <button class="btn btn-info float-right" (click)="addTabs()" >Siguiente</button>
                 </div>
 
             </div>
 
-
         </div>
+    </div>
+
+</div>

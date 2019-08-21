@@ -19,6 +19,9 @@ import { CrearComunicacionComponent } from './crear-comunicacion/crear-comunicac
     FormsModule,
     ReactiveFormsModule,
     NgxPaginationModule
+  ],
+  exports:[
+    SearchPipe
   ]
 })
 export class RegistrosModule { }

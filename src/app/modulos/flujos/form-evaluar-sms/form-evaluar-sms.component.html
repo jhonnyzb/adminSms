@@ -1,1 +1,28 @@
-<p>form-evaluar-sms works!</p>
+<div class="border p-2">
+    <div class=" p-2">
+        <p class="text-info"><span class="fa fa-{{icon}}"></span> {{name}}</p>
+    </div>
+    <div class="form-row mb-3">
+        
+            <div class="form-group col-md-6 mt-3">
+                <label for="inputState">Condiciones</label>
+                <select id="inputState" class="form-control" (change)="changeCondiciones($event)">
+                    <option value="">Keywords</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2 pt-2 mt-3">
+                <input type="text" class="form-control mt-4 text-center" disabled placeholder="es">
+            </div>
+            <div class="form-group col-md-4 mt-3">
+                <label for="inputCity">Key</label>
+                <input type="text" class="form-control">
+            </div>
+       
+        <div class="form-group col-md-12 mt-3 ">
+            <label for="inputState">Si no</label>
+            <select id="inputState" class="form-control" (change)="changePais($event)">
+                <option *ngFor="let opcion of opciones; let k=index" [selected]="k==5">{{opcion.name}}</option>
+            </select>
+        </div>
+    </div>
+</div><br>
