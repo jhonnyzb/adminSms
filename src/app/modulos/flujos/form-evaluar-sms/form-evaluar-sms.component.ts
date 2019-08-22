@@ -11,20 +11,22 @@ import { Subscription } from 'rxjs';
 })
 export class FormEvaluarSmsComponent implements OnInit, OnDestroy {
 
-  icon:string=''
-  name:string=''
+  icon: string = ''
+  name: string = ''
+  condicion: string = ''
+  key: string = ''
   opciones: any[];
   dataOpcionesSubscription: Subscription;
 
-  constructor(private router: Router, private Servicio: ServiceAllService, ) { 
+  constructor(private router: Router, private Servicio: ServiceAllService, ) {
 
     this.dataOpcionesSubscription = this.router.events.pipe(
-      filter(eve  => eve instanceof ActivationEnd),
-      filter((eve:ActivationEnd)=> eve.snapshot.firstChild === null),
-      map((eve:ActivationEnd)=>eve.snapshot.data)
-    ).subscribe(res=>{
-       this.icon =res.icon;
-       this.name = res.name
+      filter(eve => eve instanceof ActivationEnd),
+      filter((eve: ActivationEnd) => eve.snapshot.firstChild === null),
+      map((eve: ActivationEnd) => eve.snapshot.data)
+    ).subscribe(res => {
+      this.icon = res.icon;
+      this.name = res.name
     })
   }
 
@@ -32,12 +34,27 @@ export class FormEvaluarSmsComponent implements OnInit, OnDestroy {
     this.getOpciones();
   }
 
-getOpciones(){
-this.opciones = this.Servicio.dataOpciones();
-}
+  getOpciones() {
+    this.opciones = this.Servicio.dataOpciones();
+  }
 
-ngOnDestroy(){
-this.dataOpcionesSubscription.unsubscribe()
-}
+  changeCondiciones(event: any) {
+    this.condicion = event.target.value
+  }
+
+  changeOpcion(event){
+
+  }
+
+  send(){
+    let flujo = {
+      keywords: this.condicion,
+      key: this.key,
+      }
+  }
+
+  ngOnDestroy() {
+    this.dataOpcionesSubscription.unsubscribe()
+  }
 
 }

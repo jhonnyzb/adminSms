@@ -39,7 +39,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let data of peopleMasivo | search: filterPeople | paginate: { itemsPerPage: 2, currentPage: pageActual }" class="text-center">
+                <tr *ngFor="let data of peopleMasivo | search: filterPeople | paginate: { itemsPerPage: 10, currentPage: pageActual }" class="text-center">
                     <th scope="row">{{data.nombre_persona}}</th>
                     <td>{{data.numero_telefono}}</td>
                     <td><i class="fa fa-comments text-info"></i>&nbsp;SMS</td>

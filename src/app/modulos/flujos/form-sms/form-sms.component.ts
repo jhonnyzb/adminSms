@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { ServiceAllService } from 'src/app/services/service-all.service';
+
 
 @Component({
   selector: 'app-form-sms',
@@ -13,7 +15,15 @@ export class FormSmsComponent implements OnInit {
   mensajes: number = 1;
   icon:string=''
   name:string=''
-  constructor( private router: Router) { 
+  tags: any;
+  NumeroTags:number;
+  miDataInterior = [];
+  bander: boolean;
+  codigo: string = '';
+  contenido: string= '';
+  
+
+  constructor( private router: Router,private Servicio: ServiceAllService) { 
    
     this.router.events.pipe(
      filter(eve  => eve instanceof ActivationEnd),
@@ -26,7 +36,13 @@ export class FormSmsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getTags();
+   
   }
+
+ 
+
+
 
   onKey(event) {
     this.contador = event.target.value.length;
@@ -46,5 +62,58 @@ export class FormSmsComponent implements OnInit {
     else if (this.contador <= 1120) {
       this.mensajes = 7
     }
+  }
+
+
+  getTags() {
+    this.Servicio.getTags().subscribe(
+      (res)=>{
+        this.tags = res;
+        this.NumeroTags = this.tags.length;     
+      },
+      (err)=>{
+        console.log(err)
+      }
+      )
+  }
+
+
+  agregar(data: any) {
+    var name = {
+      "name": data.nombre_tag
+    }
+    this.miDataInterior.push(name);  
+  }
+
+  quitar(data:any) {
+    this.miDataInterior = this.miDataInterior.filter((s)=>{
+      if(s.name == data.nombre_tag){
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+  }
+
+  changeCodigo(e: any) {
+    this.codigo = e.target.value;
+    
+  }
+
+
+  limpiarArray(){
+    this.miDataInterior = [];
+    this.bander = false;
+  }
+
+
+  send(){
+    let mensajeFlujo = {
+      tags: this.miDataInterior,
+      de: this.codigo,
+      contenido: this.contenido,   
+    }
+
   }
 }

@@ -11,9 +11,21 @@
                 </button>
             </div>
         </div>
+    </div><br>
+    <div class="row">
+        <form class="w-100 pr-2 pl-2">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text fa fa-search pt-2"></span>
+                </div>
+                <input type="search" class="form-control" placeholder="Busqueda de tags" name="filterTags"
+                    [(ngModel)]="filterTags">
+            </div>
+        </form>
     </div>
-    <div class="row border ml-1 mr-1 mt-5 pb-3 pt-1">
-        <div class="col-md-4 pt-3   " *ngFor="let check of tags">
+
+    <div class="row border mt-5 pb-3 pt-1">
+        <div class="col-md-4 pt-3   " *ngFor="let check of tags | search: filterTags">
             <input type="checkbox" name="miDataInterior"
                 (change)="$event.target.checked ? agregar(check) : quitar(check)">&nbsp; {{check.nombre_tag}}
         </div>

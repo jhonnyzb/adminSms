@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-registro-persona',
   templateUrl: './registro-persona.component.html',
   styleUrls: ['./registro-persona.component.css']
 })
-export class RegistroPersonaComponent implements OnInit {
+export class RegistroPersonaComponent implements OnInit, OnDestroy {
   bander: boolean;
   formularioRegister: FormGroup;
   minlength: number = 10;
@@ -19,6 +20,9 @@ export class RegistroPersonaComponent implements OnInit {
   pais: string = '44';
   Contac: any;
   idtag: number;
+  tagSusbcribe: Subscription;
+  registerSusbcribe:Subscription;
+  paisSusbcribe: Subscription;
 
   constructor(private Formbuilder: FormBuilder, private Servicio: ServiceAllService,private toastrService: ToastrService) { }
 
@@ -39,16 +43,14 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
   getTags() {
-    this.Servicio.getTags().subscribe(
+    this.tagSusbcribe =  this.Servicio.getTags().subscribe(
       (res)=>{
         this.tags = res;
-        this.NumeroTags = this.tags.length;
-       
+        this.NumeroTags = this.tags.length;      
       },
       (err)=>{
         console.log(err)
       }
-
       )
   }
 
@@ -73,7 +75,7 @@ export class RegistroPersonaComponent implements OnInit {
 
   getPais(){
 
-    this.Servicio.getCountry().subscribe(
+    this.paisSusbcribe = this.Servicio.getCountry().subscribe(
       (res)=>{
           this.paises = res;
       },
@@ -102,7 +104,7 @@ export class RegistroPersonaComponent implements OnInit {
       
     }
     
-    this.Servicio.saveRegister(usuario).subscribe(
+    this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
         console.log(res)
         this.Contac = res.persona.numero_telefono;
@@ -119,9 +121,7 @@ export class RegistroPersonaComponent implements OnInit {
         });
 
       }
-    )
-    
-
+    )   
   }
 
 
@@ -144,4 +144,12 @@ export class RegistroPersonaComponent implements OnInit {
   }
 
 
+
+  ngOnDestroy(){
+    this.tagSusbcribe.unsubscribe();
+    this.paisSusbcribe.unsubscribe();
+    if(this.registerSusbcribe){
+      this.registerSusbcribe.unsubscribe();
+    }
+  }
 }

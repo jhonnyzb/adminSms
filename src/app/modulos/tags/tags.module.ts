@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagsRoutingModule } from './tags-routing.module';
 import { TagsHomeComponent } from './tags-home/tags-home.component';
 import { CrearComunicacionTagsComponent } from './crear-comunicacion-tags/crear-comunicacion-tags.component';
+import { RegistrosModule } from '../registros/registros.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CrearComunicacionTagsComponent } from './crear-comunicacion-tags/crear-
     CommonModule,
     TagsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RegistrosModule
   ]
 })
 export class TagsModule { }

@@ -42,7 +42,14 @@ export class HeaderFlujosComunicacionComponent implements OnInit, OnDestroy {
 
   }
 
-  
+  resetTabs(){
+    this.tabs = [];
+    this.bandera = 1
+    let paso ={ paso:'paso' + this.bandera }
+    this.tabs.push(paso)
+    this.route.navigate(['/usuario/flow'])
+
+  }
 
   ngOnDestroy(){
     

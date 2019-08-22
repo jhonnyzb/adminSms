@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServiceAllService } from 'src/app/services/service-all.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crear-comunicacion',
   templateUrl: './crear-comunicacion.component.html',
   styleUrls: ['./crear-comunicacion.component.css']
 })
-export class CrearComunicacionComponent implements OnInit {
+export class CrearComunicacionComponent implements OnInit, OnDestroy {
   contac: string= '';
   idtag: number;
   formularioComunicacion: FormGroup;
   Para: string = '';
   De: string = '';
   datarecibida: any;
-
+  AddComSubscription: Subscription;
+  EnvioMensajeSuscription: Subscription
 
   constructor(private Routed: ActivatedRoute, private Formbuilder: FormBuilder, private Servicio: ServiceAllService) {
     this.contac = this.Routed.snapshot.paramMap.get('id');
@@ -53,8 +55,7 @@ export class CrearComunicacionComponent implements OnInit {
       message: form.value.descripcion,
       nombreCampaña: form.value.nombreCampaña
     }
-    console.log(comunicacion)
-    this.Servicio.addComunicacion(comunicacion).subscribe(
+    this.AddComSubscription = this.Servicio.addComunicacion(comunicacion).subscribe(
       (res:any)=>{
         if(res.CodigoRespuesta > 0){
 
@@ -63,7 +64,7 @@ export class CrearComunicacionComponent implements OnInit {
               from: form.value.de,
               tags: [ {id :this.idtag}]
             }
-          this.Servicio.envioMensaje(envio).subscribe(
+          this.EnvioMensajeSuscription =  this.Servicio.envioMensaje(envio).subscribe(
             (res)=>{
               this.datarecibida = res;
               console.log(this.datarecibida);
@@ -76,11 +77,21 @@ export class CrearComunicacionComponent implements OnInit {
           console.log('bien',res)
       },
       (err)=>{
-        console.log('bienpaila',err)
+        console.log('',err)
       }
     )
 
 
   }
+
+ngOnDestroy(){
+  if(this.AddComSubscription){
+    this.AddComSubscription.unsubscribe();
+  }
+  if(this.EnvioMensajeSuscription){
+    this.EnvioMensajeSuscription.unsubscribe();
+  }
+}
+
 
 }

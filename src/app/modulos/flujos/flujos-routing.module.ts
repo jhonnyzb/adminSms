@@ -17,7 +17,7 @@ const routes: Routes = [
       path: 'formevasms', component: FormEvaluarSmsComponent, data: { icon:'mobile', name:'Evaluar mensaje SMS'}
     },
     {
-      path: 'formsmsres', component: FormSmsRespuestaComponent, data: {icon:'comment', name:'Enviar mensaje SMS'}
+      path: 'formsmsres', component: FormSmsRespuestaComponent, data: {icon:'comment', name:'Enviar mensaje  SMS respuesta'}
     }
   ]
 }

@@ -1,1 +1,17 @@
-<p>form-sms-respuesta works!</p>
+
+<div class="border p-2">
+    <div class=" p-2">
+        <p class="text-info"><span class="fa fa-{{icon}}"></span> {{name}}</p>
+    </div>
+    <div class="form-group mt-2">
+            <label for="inputState"><span class="fa fa-arrow-circle-left text-info"></span> De</label>
+            <select id="inputState" class="form-control" (change)="changePais($event)">
+                <option value="">890704</option>
+            </select>
+    </div>
+    <div class="form-group mt-4">
+            <label> <i class="fa fa-address-card text-info"></i> Contenido del mensaje</label>
+            <label class="float-right"><small>{{mensajes}} mensaje / {{contador}} caracteres</small> </label>
+            <textarea class="form-control" placeholder="" (keyup)="onKey($event)" rows="8"></textarea>
+        </div>
+</div><br>

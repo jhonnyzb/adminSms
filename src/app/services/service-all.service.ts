@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, Subject } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceAllService {
 
-  people = [];
-  bandera: number = 1;
   
+  baseUrl: string = 'http://10.133.10.175:81'
 
   constructor(private http: HttpClient) { }
 
@@ -20,11 +19,11 @@ export class ServiceAllService {
       email: email,
       password: pass
     }
-    return this.http.post('http://10.133.10.175/auth/login', usuario);
+    return this.http.post(this.baseUrl + '/auth/login', usuario);
   }
 
   getCountry() {
-    return this.http.get('http://10.133.10.175/admin/pais/getPaises', {
+    return this.http.get(this.baseUrl + '/admin/pais/getPaises', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     })
   }
@@ -32,33 +31,33 @@ export class ServiceAllService {
 
   subirImport(peopleImport: any) {
 
-    return this.http.post('http://10.133.10.175/admin/persona/agregarMasivo', peopleImport, {
+    return this.http.post(this.baseUrl + '/admin/persona/agregarMasivo', peopleImport, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     })
 
   }
 
   getTags() {
-    return this.http.get('http://10.133.10.175/admin/tags/listar', {
+    return this.http.get(this.baseUrl + '/admin/tags/listar', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     });
   }
 
 
   saveRegister(usuario: any) {
-    return this.http.post('http://10.133.10.175/admin/persona/agregar', usuario, {
+    return this.http.post(this.baseUrl + '/admin/persona/agregar', usuario, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     });
   }
 
   addComunicacion(comunicacion: any) {
-    return this.http.post('http://10.133.10.175/admin/tags/actualizarMensaje', comunicacion, {
+    return this.http.post(this.baseUrl + '/admin/tags/actualizarMensaje', comunicacion, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     })
   }
 
   envioMensaje(envio) {
-    return this.http.post('http://10.133.10.175/admin/temp/sms/enviar', envio, {
+    return this.http.post(this.baseUrl + '/admin/temp/sms/enviar', envio, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     })
   }

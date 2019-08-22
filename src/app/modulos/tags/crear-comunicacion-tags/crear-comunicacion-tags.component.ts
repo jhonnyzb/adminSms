@@ -12,6 +12,8 @@ export class CrearComunicacionTagsComponent implements OnInit {
   arrayTags:any;
   formularioComuMasiva: FormGroup;
   datarecibida: any;
+  contador: number = 0;
+  mensajes: number = 1;
   
   constructor(private Formbuilder: FormBuilder, private Servicio: ServiceAllService) { }
 
@@ -77,7 +79,27 @@ export class CrearComunicacionTagsComponent implements OnInit {
         }
       )
 
+  }
 
+
+  onKey(event) {
+    this.contador = event.target.value.length;
+    if (this.contador <= 160) {
+      this.mensajes = 1
+    } else if (this.contador <= 320) {
+      this.mensajes = 2
+    } else if (this.contador <= 480) {
+      this.mensajes = 3
+    }else if (this.contador <= 640) {
+      this.mensajes = 4
+    }else if (this.contador <= 800) {
+      this.mensajes = 5
+    }else if (this.contador <= 960) {
+      this.mensajes = 6
+    }
+    else if (this.contador <= 1120) {
+      this.mensajes = 7
+    }
   }
 
 

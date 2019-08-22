@@ -21,8 +21,8 @@
             </div><br><br>
             <div class="form-group">
                 <label> <i class="fa fa-address-card text-info"></i> Contenido del mensaje</label>
-                <label class="float-right"><small>1 mensaje / 160 caracteres</small> </label>
-                <textarea class="form-control " placeholder="" rows="8" formControlName="contenido"></textarea>
+                <label class="float-right"><small>{{mensajes}} mensaje / {{contador}} caracteres</small> </label>
+                <textarea class="form-control " placeholder="" rows="8" formControlName="contenido" (keyup)="onKey($event)" ></textarea>
             </div>
             <div class="border pl-2 mt-5 ">
                 <div class="d-flex align-items-center">

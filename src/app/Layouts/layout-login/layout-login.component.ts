@@ -62,7 +62,7 @@ export class LayoutLoginComponent implements OnInit {
        }
 
       }, (erro) => {
-        this.toastrService.error('En la conexion con base de datos', 'Error', {
+        this.toastrService.error('Usuario no autorizado', 'Error', {
           timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'
         });
       })

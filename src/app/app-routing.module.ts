@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LayoutLoginComponent } from './Layouts/layout-login/layout-login.component';
 import { LayoutUsuarioComponent } from './Layouts/layout-usuario/layout-usuario.component';
+import { AdminGuard } from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -9,7 +10,7 @@ const routes: Routes = [
     path: '', component: LayoutLoginComponent
   },
   {
-    path: 'usuario', component: LayoutUsuarioComponent,
+    path: 'usuario', component: LayoutUsuarioComponent, canActivate: [AdminGuard],
     children:[
       {
         path: '',
