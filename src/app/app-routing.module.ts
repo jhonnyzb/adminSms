@@ -22,10 +22,6 @@ const routes: Routes = [
       {
         path: 'flow',
         loadChildren: ()=> import ('./modulos/flujos/flujos.module').then(m=>m.FlujosModule)
-      },
-      {
-        path: 'flow2',
-        loadChildren: ()=> import ('./modulos/flujos2/flujos2.module').then(m=>m.Flujos2Module)
       }
     ]
   }
