@@ -24,18 +24,18 @@
 
 
     <div class="row m-3">
-        <div *ngIf="unicaAudiencia" class="col-12 col-md-6 col-lg-4 animated fadeInDown">
-            <div class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
+        <div class="col-12 col-md-6 col-lg-4 ">
+            <div  *ngIf="unicaAudiencia" class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
                 <div class="float-left h-100 w-25 d-flex align-items-center justify-content-center">
                     <i class="fa fa-play"></i>
                 </div>
                 <div class="float-left h-100 w-50 p-1" data-toggle="modal" data-target="#ModalTags">
-                    <label>Unica Audiencia</label>
-                    <p><small>{{segmentosTags}}</small></p>
+                    <label>Audiencia 1 vez</label>
+                    <p class="text-justify"><small>{{segmentosTags}}</small></p>
                 </div>
-                <div class="float-left h-100 w-25 p-1 d-flex align-items-center justify-content-end">
+                <div class="float-left h-100 w-25 p-1 d-flex align-items-center justify-content-center">
                     <i class="fa fa-bars" data-toggle="dropdown" style="cursor: pointer"></i>
-                    <div class="dropdown-menu animated fadeIn">
+                    <div class="dropdown-menu animated fadeIn" >
                         <h6 class="dropdown-header">Selecione elemento</h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="borrarUnicaAudiencia()"><i
@@ -45,7 +45,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="clickMensajeSms(1)"><i class="fa fa-comments text-info"></i>
                             Enviar Mensaje SMS</a>
-                        <a class="dropdown-item"><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
+                        <a class="dropdown-item" (click)="clickMensajeWhatsapp(1)"><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
                         <h6 class="dropdown-header">FUNCIONES</h6>
                         <a class="dropdown-item"><i class="fa fa-phone text-info"></i> Evaluar mensaje entrante</a>
                         <a class="dropdown-item"><i class="fa fa-file text-info"></i> Evaluar datos</a>
@@ -57,17 +57,17 @@
 
 
 
-        <div *ngIf="entradaSms" class="col-12 col-md-6 col-lg-4 animated fadeInDown">
-            <div class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
+        <div  class="col-12 col-md-6 col-lg-4 ">
+            <div *ngIf="entradaSms" class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
                 <div class=" float-left h-100 w-25 d-flex align-items-center justify-content-center ">
                     <i class="fa fa-play"></i>
                 </div>
                 <div class=" float-left h-100 w-50 p-1">
                     <label>Entrada SMS </label>
-                    <p><small>Audiencia Mens</small> </p>
+                    <p><small>Audiencia envia sms</small> </p>
                 </div>
                 <div class="float-left h-100 w-25 p-1 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-bars" data-toggle="dropdown"></i>
+                    <i class="fa fa-bars" data-toggle="dropdown" style="cursor: pointer"></i>
                     <div class="dropdown-menu animated fadeIn">
                         <h6 class="dropdown-header">Selecione elemento</h6>
                         <div class="dropdown-divider"></div>
@@ -78,7 +78,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="clickMensajeSms(2)"><i class="fa fa-comments text-info"></i>
                             Enviar Mensaje SMS</a>
-                        <a class="dropdown-item"><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
+                        <a class="dropdown-item" (click)="clickMensajeWhatsapp(2)" ><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
                         <h6 class="dropdown-header">FUNCIONES</h6>
                         <a class="dropdown-item"><i class="fa fa-phone text-info"></i> Evaluar mensaje entrante</a>
                         <a class="dropdown-item"><i class="fa fa-file text-info"></i> Evaluar datos</a>
@@ -89,8 +89,8 @@
 
 
 
-        <div *ngIf="eventosPersonas" class="col-12 col-md-6 col-lg-4 animated fadeInDown">
-            <div class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
+        <div class="col-12 col-md-6 col-lg-4 ">
+            <div  *ngIf="eventosPersonas" class="bg-info overflow-hidden  rounded-lg text-white p-1 border border-warning config">
                 <div class=" float-left h-100 w-25 d-flex align-items-center justify-content-center ">
                     <i class="fa fa-play"></i>
                 </div>
@@ -99,8 +99,9 @@
                     <p><small>Audiencia perfil </small> </p>
                 </div>
                 <div class="float-left h-100 w-25 p-1 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-bars" data-toggle="dropdown"></i>
-                    <div class="dropdown-menu animated fadeIn">
+                    
+                    <i class="fa fa-bars" data-toggle="dropdown" style="cursor: pointer"></i>
+                    <div class="dropdown-menu animated fadeIn" >
                         <h6 class="dropdown-header">Selecione elemento</h6>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="borrarEventosPersonas()"><i
@@ -110,7 +111,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" (click)="clickMensajeSms(3)"><i class="fa fa-comments text-info"></i>
                             Enviar Mensaje SMS</a>
-                        <a class="dropdown-item"><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
+                        <a class="dropdown-item" (click)="clickMensajeWhatsapp(3)" ><i class="fa fa-whatsapp text-info"></i> Enviar mensaje WhatsApp</a>
                         <h6 class="dropdown-header">FUNCIONES</h6>
                         <a class="dropdown-item"><i class="fa fa-phone text-info"></i> Evaluar mensaje entrante</a>
                         <a class="dropdown-item"><i class="fa fa-file text-info"></i> Evaluar datos</a>
@@ -118,29 +119,58 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
+
+
+
+
+
+    
+    <div class="row m-3">
+        <div  class="col-12 col-md-6 col-lg-4 "  >
+            <app-mensaje-sms *ngIf="mensajeSmsAudienciaUnica" ideSmsUnica="smsUnica"  (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+            <app-mensaje-whatsapp  *ngIf="mensajeWhatsappAudienciaUnica"></app-mensaje-whatsapp>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <app-mensaje-sms *ngIf="mensajeSmsEntradaSms" ideSmsUnica="smsEntrada" (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+            <app-mensaje-whatsapp  *ngIf="mensajeWhatsappEntradaSms"></app-mensaje-whatsapp>
+        </div>
+        <div   class="col-12 col-md-6 col-lg-4">
+            <app-mensaje-sms *ngIf="mensajeSmsEventosPersonas" ideSmsUnica="smsEventos" (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+            <app-mensaje-whatsapp  *ngIf="mensajeWhatsappEventosPersonas"></app-mensaje-whatsapp>
+        </div>
+    </div>
+
 
     <div class="row m-3">
-        <div *ngIf="mensajeSmsAudienciaUnica" class="col-12 col-md-6 col-lg-4  animated fadeInDown">
-            <app-mensaje-sms (borrarSms)="clickSmsHijo($event)"></app-mensaje-sms>
+            <div  class="col-12 col-md-6 col-lg-4 "  >
+                <app-mensaje-sms *ngIf="mensajeSmsAudienciaUnica1" ideSmsUnica="smsUnica1"  (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+                <app-mensaje-whatsapp  *ngIf="mensajeWhatsappAudienciaUnica1"></app-mensaje-whatsapp>
+            </div>
+    
+            <div class="col-12 col-md-6 col-lg-4">
+                <app-mensaje-sms *ngIf="mensajeSmsEntradaSms1" ideSmsUnica="smsEntrada1" (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+                <app-mensaje-whatsapp  *ngIf="mensajeWhatsappEntradaSms1"></app-mensaje-whatsapp>
+            </div>
+            <div   class="col-12 col-md-6 col-lg-4">
+                <app-mensaje-sms *ngIf="mensajeSmsEventosPersonas1" ideSmsUnica="smsEventos1" (eventoSms)="clickSmsHijo($event)"></app-mensaje-sms>
+                <app-mensaje-whatsapp  *ngIf="mensajeWhatsappEventosPersonas1"></app-mensaje-whatsapp>
+            </div>
         </div>
 
-        <div *ngIf="mensajeSmsEntradaSms" class="col-12 col-md-6 col-lg-4  animated fadeInDown">
-            <app-mensaje-sms  (borrarSms)="clickSmsHijo($event)"></app-mensaje-sms>
-        </div>
-        <div  *ngIf="mensajeSmsEventosPersonas" class="col-12 col-md-6 col-lg-4  animated fadeInDown">
-            <app-mensaje-sms (borrarSms)="clickSmsHijo($event)"></app-mensaje-sms>
-        </div>
-    </div>
+
+
+
 
 </div>
 
 
 
-<!-- Modal -->
+
+
+
+<!-- Modal audiencia 1vez-->
 <div class="modal fade" id="ModalTags" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
