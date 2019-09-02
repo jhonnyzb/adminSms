@@ -1,0 +1,17 @@
+.panel{
+    background-color: #ededed;
+    padding: 5px; 
+    height: 600px;
+}
+.config{
+    height: 70px;
+}
+label{
+    margin-bottom: 0% !important
+}
+.w-50{
+    cursor: pointer;
+}
+.dropdown-item{
+    cursor: pointer;
+}

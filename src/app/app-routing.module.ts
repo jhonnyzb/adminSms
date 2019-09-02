@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: LayoutLoginComponent
   },
   {
-    path: 'usuario', component: LayoutUsuarioComponent, canActivate: [AdminGuard],
+    path: 'usuario', component: LayoutUsuarioComponent, //canActivate: [AdminGuard],
     children:[
       {
         path: '',
@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'flow',
         loadChildren: ()=> import ('./modulos/flujos/flujos.module').then(m=>m.FlujosModule)
+      },
+      {
+        path: 'flow_2',
+        loadChildren: ()=> import ('./modulos/flujo/flujo.module').then(m=>m.FlujoModule)
       }
     ]
   }

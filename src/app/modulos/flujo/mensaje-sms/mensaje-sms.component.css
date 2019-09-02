@@ -1,0 +1,13 @@
+.config{
+    height: 70px;
+}
+label{
+    margin-bottom: 0% !important;
+}
+
+.dropdown-item{
+    cursor: pointer;
+}
+.pointer{
+    cursor: pointer;
+}
