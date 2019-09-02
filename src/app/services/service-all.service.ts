@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ServiceAllService {
 
   
-  baseUrl: string = 'http://10.133.10.175:81'
+  baseUrl: string = 'http://10.133.10.175'
 
   constructor(private http: HttpClient) { }
 
