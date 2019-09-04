@@ -9,12 +9,12 @@ import { ServiceAllService } from 'src/app/services/service-all.service';
 })
 export class CrearComunicacionTagsComponent implements OnInit {
   arrayenvio = [];
-  arrayTags:any;
+  arrayTags: any;
   formularioComuMasiva: FormGroup;
   datarecibida: any;
   contador: number = 0;
   mensajes: number = 1;
-  
+
   constructor(private Formbuilder: FormBuilder, private Servicio: ServiceAllService) { }
 
   ngOnInit() {
@@ -27,58 +27,42 @@ export class CrearComunicacionTagsComponent implements OnInit {
     this.formularioComuMasiva = this.Formbuilder.group(
       {
         de: ['', Validators.required],
-        contenido: ['',Validators.required]
+        contenido: ['', Validators.required]
       }
     )
   }
 
 
-  getTag(){
-   this.arrayTags = JSON.parse(localStorage.getItem("arraytags"))
-   console.log(this.arrayTags.id)
- 
+  getTag() {
+    this.arrayTags = JSON.parse(localStorage.getItem("arraytags"))
+    console.log(this.arrayTags.id)
+
   }
 
-  SendComunicacionMasivo(form: any){
-    
+  SendComunicacionMasivo(form: any) {
+
     for (var i = 0; i < this.arrayTags.length; i++) {
       var name = {
-        "id": this.arrayTags[i].id 
+        "id": this.arrayTags[i].id
       }
-
-    this.arrayenvio.push(name);   
     }
-      let ComMasiva = {
-        id: this.arrayTags[0].id,
-        message: form.value.contenido,
+    this.arrayenvio.push(name);
+    let envio = {
+      from: form.value.de,
+      tags: this.arrayenvio,
+      texto: form.value.contenido,
+      numero_atributos: 1
+    }
+    console.log(envio)
+    this.Servicio.envioMensaje(envio).subscribe(
+      (res) => {
+        this.datarecibida = res;
+        console.log(this.datarecibida);
+      },
+      (err) => {
+        console.log(err);
       }
-      console.log(ComMasiva)
-      this.Servicio.addComunicacion(ComMasiva).subscribe(
-        (res:any)=>{
-          if(res.CodigoRespuesta > 0){
-
-          }else{
-              let envio ={
-                from: form.value.de,
-                tags: this.arrayenvio
-              }
-              console.log(envio)
-            this.Servicio.envioMensaje(envio).subscribe(
-              (res)=>{
-                this.datarecibida = res;
-                console.log(this.datarecibida);
-              },
-              (err)=>{
-                console.log(err)
-              }
-              )
-          }
-          console.log(res);
-        },(err)=>{
-          console.log(err)
-        }
-      )
-
+    )
   }
 
 
@@ -90,11 +74,11 @@ export class CrearComunicacionTagsComponent implements OnInit {
       this.mensajes = 2
     } else if (this.contador <= 480) {
       this.mensajes = 3
-    }else if (this.contador <= 640) {
+    } else if (this.contador <= 640) {
       this.mensajes = 4
-    }else if (this.contador <= 800) {
+    } else if (this.contador <= 800) {
       this.mensajes = 5
-    }else if (this.contador <= 960) {
+    } else if (this.contador <= 960) {
       this.mensajes = 6
     }
     else if (this.contador <= 1120) {

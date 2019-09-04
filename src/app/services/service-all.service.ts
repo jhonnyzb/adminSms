@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class ServiceAllService {
 
   
-  baseUrl: string = 'http://10.133.10.175'
+  baseUrl: string = environment.urlApi;
 
   constructor(private http: HttpClient) { }
 
@@ -38,7 +39,7 @@ export class ServiceAllService {
   }
 
   getTags() {
-    return this.http.get(this.baseUrl + '/admin/tags/listar', {
+    return this.http.get(this.baseUrl + '/admin/tags/listarPorUsuario', {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     });
   }
@@ -57,7 +58,7 @@ export class ServiceAllService {
   }
 
   envioMensaje(envio) {
-    return this.http.post(this.baseUrl + '/admin/temp/sms/enviar', envio, {
+    return this.http.post(this.baseUrl + '/admin/temp/sms/enviarMensajesMultiples', envio, {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
     })
   }

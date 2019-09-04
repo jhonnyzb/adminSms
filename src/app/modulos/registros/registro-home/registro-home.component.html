@@ -85,7 +85,7 @@
                         Pais</label>
                     <select class="form-control" (change)="changepais($event)">
                         <option value="" disabled>Elige un pais</option>
-                        <option *ngFor="let pais of paises; let k = index" [selected]="k == 43" [value]="pais.id">
+                        <option *ngFor="let pais of paises" [value]="pais.id">
                             {{pais.nombre_pais_espanol}}</option>
                     </select>
                 </div>

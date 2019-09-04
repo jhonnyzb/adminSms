@@ -52,7 +52,7 @@
                         <div class="text-center">
                             <i class="fa fa-users fa-2x text-info"></i>
                             <p style="margin-bottom: 0%"><small>Enviados</small></p>
-                            <p>{{datarecibida.cantidad_personas_enviadas}}
+                            <p>{{datarecibida.historia.cantidad_personas_enviadas}}
                             </p>
                         </div>
                     </div>
@@ -60,14 +60,14 @@
                         <div class="text-center">
                             <i class="fa fa-arrows-h fa-2x text-info"></i>
                             <p style="margin-bottom: 0%"><small>Trafico</small></p>
-                            <p>{{datarecibida.cantidad_sms_enviados}}</p>
+                            <p>{{datarecibida.historia.cantidad_sms_enviados}}</p>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="text-center">
                             <i class="fa fa-usd fa-2x text-info"></i>
-                            <p style="margin-bottom: 0%"><small>Costo Total</small></p>
-                            <p>{{datarecibida.precio_por_mensaje * datarecibida.cantidad_sms_enviados}} {{codigo_divisa}}</p>
+                            <p style="margin-bottom: 0%"><small>Costo por Mensaje</small></p>
+                            <p>{{datarecibida.historia.precio_por_mensaje}}&nbsp;{{datarecibida.historia.codigo_divisa}}</p>
                         </div>
                     </div>
                 </div>

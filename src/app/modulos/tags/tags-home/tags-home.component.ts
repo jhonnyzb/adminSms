@@ -12,6 +12,7 @@ export class TagsHomeComponent implements OnInit {
   tags: any;
   miDataInterior = [];
   bcrearcomun: boolean = false
+  filterTags:any
 
   constructor(private Servicio: ServiceAllService, private router: Router) { }
 

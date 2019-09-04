@@ -47,41 +47,21 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
     this.De = e.target.value;
   }
 
-  SendComunicacion(form:any){
-    let comunicacion = {
-      id:this.idtag,
-      para: this.contac,
-      de: form.value.de,
-      message: form.value.descripcion,
-      nombreCampaña: form.value.nombreCampaña
-    }
-    this.AddComSubscription = this.Servicio.addComunicacion(comunicacion).subscribe(
-      (res:any)=>{
-        if(res.CodigoRespuesta > 0){
 
-        }else{
-            let envio ={
-              from: form.value.de,
-              tags: [ {id :this.idtag}]
-            }
-          this.EnvioMensajeSuscription =  this.Servicio.envioMensaje(envio).subscribe(
-            (res)=>{
-              this.datarecibida = res;
-              console.log(this.datarecibida);
-            },
-            (err)=>{
-              console.log(err)
-            }
-            )
-        }
-          console.log('bien',res)
-      },
-      (err)=>{
-        console.log('',err)
+  SendComunicacion(form:any){
+    let envio = {
+      from: form.value.de,
+      tags: [ {id :this.idtag}],
+      texto: form.value.descripcion,
+      numero_atributos: 1
+    }
+    console.log(envio)
+    this.EnvioMensajeSuscription =  this.Servicio.envioMensaje(envio).subscribe(
+      (res)=>{
+        console.log(res)
+        this.datarecibida = res;
       }
     )
-
-
   }
 
 ngOnDestroy(){

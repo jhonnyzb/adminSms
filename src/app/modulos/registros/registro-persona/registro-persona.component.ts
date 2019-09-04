@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,6 +10,9 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./registro-persona.component.css']
 })
 export class RegistroPersonaComponent implements OnInit, OnDestroy {
+
+ 
+
   bander: boolean;
   formularioRegister: FormGroup;
   minlength: number = 10;
@@ -20,6 +23,10 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
   pais: string = '44';
   Contac: any;
   idtag: number;
+  arrayAtributos: any[]= [];
+  formAtributosVer: boolean = false;
+  
+
   tagSusbcribe: Subscription;
   registerSusbcribe:Subscription;
   paisSusbcribe: Subscription;
@@ -37,7 +44,10 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
     this.formularioRegister = this.Formbuilder.group(
       {
         name: ['', Validators.required],
-        telefono: ['', [Validators.required, Validators.minLength(this.minlength), Validators.pattern(/^[0-9]+$/)]]
+        telefono: ['', [Validators.required, Validators.minLength(this.minlength), Validators.pattern(/^[0-9]+$/)]],
+        mail: ['', [Validators.pattern(/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/)]],
+        atributo:[''],
+        valor:[]
       }
     )
   }
@@ -95,15 +105,31 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
     this.pais = e.target.value;
   }
 
+
+  formularioAtributos(form: any){
+    let atributos = {
+      nombre: form.value.atributo,
+      valor: form.value.valor
+    }
+    this.arrayAtributos.push(atributos)
+    console.log(this.arrayAtributos)
+    let atribu = this.formularioRegister.get('atributo')
+    let valor = this.formularioRegister.get('valor')
+    atribu.reset();
+    valor.reset();
+  }
+
+
   guardarRegister(form:any){
     let usuario = {
       name: form.value.name,
       countryId: this.pais,
       phone: form.value.telefono,
-      tags: this.miDataInterior
-      
+      tags: this.miDataInterior,
+      email: form.value.mail,
+      attributeArray: this.arrayAtributos 
     }
-    
+    console.log(usuario)
     this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
         console.log(res)
@@ -124,6 +150,25 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
     )   
   }
 
+
+
+  formAtributos(){
+    if (this.formAtributosVer == true) {
+      this.formAtributosVer = false;
+    }else{
+      this.formAtributosVer = true
+    }
+   
+   }
+
+
+   eliminarAtributo(indiceAtributo: any){
+    this.arrayAtributos.splice(indiceAtributo, 1)
+   }
+
+   eliminarAtributosTodo(){
+     this.arrayAtributos = [];
+   }
 
   //Metodo deteccion error  formulario Login input userName y Password 
   public getError(controlName: string): boolean {

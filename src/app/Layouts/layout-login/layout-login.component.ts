@@ -50,7 +50,8 @@ export class LayoutLoginComponent implements OnInit {
    //Metodo acceder al servicio del login
    public onLogin(forms: FormGroup) {
     this.dataLoginSubscription = this.Services.login(forms.value.userName, forms.value.password).subscribe(
-      (res: any) => {      
+      (res: any) => {    
+        console.log(res)  
         if (res.codigoRespuesta === 1001) {       
             this.toastrService.error('Compruebe las credenciales', 'Error', {
             timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'

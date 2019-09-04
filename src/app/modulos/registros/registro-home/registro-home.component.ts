@@ -9,7 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class RegistroHomeComponent implements OnInit {
   formularioImpor: FormGroup;
-  pais: string = '43';
+  pais: string = '';
   people: any[];
   total: number;
   pageActual: number = 1;
@@ -73,7 +73,9 @@ export class RegistroHomeComponent implements OnInit {
   }
 
   changepais(e: any) {
+    console.log(e)
     this.pais = e.target.value
+
   }
 
   sendImport(form: any) {
@@ -84,11 +86,11 @@ export class RegistroHomeComponent implements OnInit {
       file: fil[1],
       delimiter:form.value.delimitador
     }
-
+    console.log(peopleImport)
     this.Servicio.subirImport(peopleImport).subscribe(
       (res:any)=>{
         this.peopleMasivo = res.personas
-          console.log(res.personas)
+          console.log('res', res.personas)
       },
       (err)=>{
         console.log(err)
@@ -115,6 +117,9 @@ export class RegistroHomeComponent implements OnInit {
       );
     });
   }
+
+
+  
  
   public getError(controlName: string): boolean {
     let error = false;

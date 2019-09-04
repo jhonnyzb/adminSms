@@ -3,7 +3,8 @@
         <div class="col-12">
             <div class="d-inline text-info h4"> Registro Persona</div>
             <div class="d-inline  text-info float-right">
-                <button class="btn btn-info  mb-1" [disabled]="formularioRegister.invalid" [routerLink]="['/usuario/comunicacion', Contac,idtag]"><span
+                <button class="btn btn-info  mb-1" [disabled]="formularioRegister.invalid"
+                    [routerLink]="['/usuario/comunicacion', Contac,idtag]"><span
                         class="fa fa-plus-square"></span>&nbsp;Crear Comunicación
                 </button>
             </div>
@@ -12,18 +13,62 @@
     <div class="row pl-2 pr-2">
         <form [formGroup]="formularioRegister" class="w-100">
             <div class="form-group">
-                <label for="">Nombre</label>
+                <label>Nombre</label>
                 <input type="text" class="form-control" placeholder="Digite Nombre" formControlName="name">
                 <div *ngIf="getError('name')" class="alert alert-danger mt-1" role="alert">
                     Campo Requerido
                 </div>
             </div><br>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" class="form-control" placeholder="Digite Email" formControlName="mail">
+                <div *ngIf="getError('mail')" class="alert alert-danger mt-1" role="alert">
+                    email invalido
+                </div>
+            </div><br>
+            <div class="row pl-3 mb-3">
+                <label (click)="formAtributos()" class="fa fa-plus-circle  c-pointer mr-2"> Agregar atributos</label>
+                <label (click)="eliminarAtributosTodo()" class="fa fa-minus-circle  c-pointer"> Eliminar atributos</label>
+            </div>
+            <div *ngIf="formAtributosVer" class="form-row">
+                <div class="form-group col-md-5">
+                    <label>Atributo</label>
+                    <input type="text" class="form-control" formControlName="atributo">
+                    <div *ngIf="getError('atributo')" class="alert alert-danger mt-1" role="alert">
+                        Error de Atributo
+                    </div>
+
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Valor</label>
+                    <input type="text" class="form-control" formControlName="valor">
+                    <div *ngIf="getError('valor')" class="alert alert-danger mt-1" role="alert">
+                        Error en el valor
+                    </div>
+                </div>
+                <div class="form-group col-md-3 pt-p">
+                    <button class="btn btn-info btn-block" (click)="formularioAtributos(formularioRegister)"><i
+                            class="fa fa-plus-circle"></i> Agregar</button>
+                </div>
+            </div>
+            <div class="form-row"  >
+                <table class="table table-sm">
+                    <tbody>
+                        <tr *ngFor="let atributo of arrayAtributos; let k = index">
+                            <td class="text-center">{{atributo.nombre}}</td>
+                            <td class="text-center">{{atributo.valor}}</td>
+                            <td class="text-center"><span class="fa fa-trash text-danger c-pointer" (click)="eliminarAtributo(k)" > Eliminar</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                <hr >
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="inputState">Pais</label>
                     <select id="inputState" class="form-control" (change)="changePais($event)">
-                        <option value="" disabled>Elige un país</option>
-                        <option *ngFor="let pais of paises" [selected]="k == 43" [value]="pais.id">{{pais.nombre_pais_espanol}}</option>
+                        <option *ngFor="let pais of paises" [value]="pais.id">
+                            {{pais.nombre_pais_espanol}}</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -49,7 +94,8 @@
         </div>
     </div><br><br>
     <div class="row pl-2 pr-2">
-        <button class="btn btn-info btn-block" [disabled]="formularioRegister.invalid" (click)="guardarRegister(formularioRegister)" >Agregar Persona</button>
+        <button class="btn btn-info btn-block" [disabled]="formularioRegister.invalid"
+            (click)="guardarRegister(formularioRegister)">Agregar Persona</button>
     </div>
 </div>
 
@@ -66,18 +112,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-check">     
-                    <div class="row" >
-                            <div class="col-md-4 pt-3" *ngFor="let check of tags">
-                                <input type="checkbox" name= "miDataInterior" (change)="$event.target.checked ? agregar(check) : quitar(check)">&nbsp; {{check.nombre_tag}}
-                            </div>
-                    </div>            
-            </div>
+                <div class="form-check">
+                    <div class="row">
+                        <div class="col-md-4 pt-3" *ngFor="let check of tags">
+                            <input type="checkbox" name="miDataInterior"
+                                (change)="$event.target.checked ? agregar(check) : quitar(check)">&nbsp;
+                            {{check.nombre_tag}}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="limpiarArray()"  data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-info" data-dismiss="modal" >Guardar</button>
+                <button type="button" class="btn btn-secondary" (click)="limpiarArray()"
+                    data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Guardar</button>
             </div>
         </div>
     </div>
-</div>  
+</div>
