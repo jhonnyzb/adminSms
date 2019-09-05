@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MensajeWhatsappComponent implements OnInit {
 
+  codigode:string='';
+  contenidoMensaje: string='';
   constructor() { }
 
   ngOnInit() {
