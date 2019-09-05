@@ -17,7 +17,7 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   De: string = '';
   datarecibida: any;
   AddComSubscription: Subscription;
-  EnvioMensajeSuscription: Subscription
+  EnvioMensajeSuscription: Subscription;
 
   constructor(private Routed: ActivatedRoute, private Formbuilder: FormBuilder, private Servicio: ServiceAllService) {
     this.contac = this.Routed.snapshot.paramMap.get('id');
@@ -57,7 +57,7 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
     }
     console.log(envio)
     this.EnvioMensajeSuscription =  this.Servicio.envioMensaje(envio).subscribe(
-      (res)=>{
+      (res:any)=>{
         console.log(res)
         this.datarecibida = res;
       }
