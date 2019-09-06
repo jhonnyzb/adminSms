@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row mt-5">
         <div class="col-12">
-            <div class="d-inline h4"><i class="fa fa-phone-square text-info"></i> Crear Comunicación
+            <div class="d-inline h4 " ><i class="fa fa-phone-square text-info "></i> Crear Comunicación
             </div>
         </div><br><br>
     </div>
@@ -17,13 +17,13 @@
             </div><br><br>
             <div class="form-group">
                 <label> <i class="fa fa-address-card text-info"></i> Contenido del mensaje</label>
-                <label class="float-right"><small>1 mensaje / 160 caracteres</small> </label>
-                <textarea class="form-control " placeholder="" rows="8" formControlName="descripcion"></textarea>
+                <label class="float-right "><small>/{{contador}} caracteres</small> </label> <label class="float-right" [ngClass]="{'color': mensajes === 2, 'color1': mensajes === 3, 'color2': mensajes === 4 }" ><small> {{mensajes}} mensaje</small></label>
+                <textarea class="form-control " placeholder="" rows="8" formControlName="descripcion" (keyup)="onKey($event)"></textarea>
             </div>
             <div class="border pl-2 mt-5 ">
                 <div class="d-flex align-items-center">
                     <i class="fa fa-comments fa-4x text-info"></i>
-                    <input type="text" class="form-control w-50 ml-2" formControlName="nombreCampaña"
+                    <input type="text" class="form-control w-50 ml-2 " formControlName="nombreCampaña"
                         placeholder="Nombre campaña">
                     <div class="w-100 pr-2">
                         <button class="btn btn-info float-right w-25"

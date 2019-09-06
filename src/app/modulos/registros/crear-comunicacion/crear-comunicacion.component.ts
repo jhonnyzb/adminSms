@@ -18,6 +18,9 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   datarecibida: any;
   AddComSubscription: Subscription;
   EnvioMensajeSuscription: Subscription;
+  contador: number = 0;
+  mensajes: number = 1;
+  
 
   constructor(private Routed: ActivatedRoute, private Formbuilder: FormBuilder, private Servicio: ServiceAllService) {
     this.contac = this.Routed.snapshot.paramMap.get('id');
@@ -62,6 +65,26 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
         this.datarecibida = res;
       }
     )
+  }
+
+  onKey(event) {
+    this.contador = event.target.value.length;
+    if (this.contador <= 160) {
+      this.mensajes = 1
+    } else if (this.contador <= 320) {
+      this.mensajes = 2
+    } else if (this.contador <= 480) {
+      this.mensajes = 3
+    } else if (this.contador <= 640) {
+      this.mensajes = 4
+    } else if (this.contador <= 800) {
+      this.mensajes = 5
+    } else if (this.contador <= 960) {
+      this.mensajes = 6
+    }
+    else if (this.contador <= 1120) {
+      this.mensajes = 7
+    }
   }
 
 ngOnDestroy(){

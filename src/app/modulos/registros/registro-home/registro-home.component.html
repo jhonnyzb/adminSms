@@ -46,7 +46,7 @@
                 </tr>
             </tbody>
         </table>
-        <pagination-controls class="w-100 text-center" (pageChange)="pageActual = $event" 
+        <pagination-controls *ngIf="peopleMasivo" class="w-100 text-center" (pageChange)="pageActual = $event" 
                               previousLabel="Anterior"
                               nextLabel="Siguiente">
         </pagination-controls>
