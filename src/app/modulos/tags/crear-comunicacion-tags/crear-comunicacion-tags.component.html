@@ -17,7 +17,7 @@
             </div><br><br>
             <div class="form-group">
                 <label><i class="fa fa-mail-reply text-info"></i>De</label>
-                <input type="text" class="input1 rounded" name="de" [(ngModel)]="de">
+                <input type="number" class="input1 rounded" name="de" [(ngModel)]="de">
             </div><br><br>
             <div class="form-group">
                 <label> <i class="fa fa-address-card text-info"></i> Contenido del mensaje</label>
@@ -57,17 +57,26 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="ModalReporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="ModalReporte" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Reporte de envio </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" (click)="limpiarTodo()" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" *ngIf="datarecibida" >
+            <div *ngIf="cargueDatos" class="modal-body text-center">
+                   <img src="../../../../assets/img/loadingList.gif"  alt="Cargando">
+            </div>
+
+            <div *ngIf="errorEnvioMensaje" class="modal-body">
+                    <div class="alert alert-danger" role="alert">
+                           Error en el proceso de envio, intentelo nuevamente
+                    </div>
+            </div>
+            <div class="modal-body" *ngIf="bienEnvioMeensaje">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="text-center">
@@ -113,8 +122,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Obtener Reporte</button>
+                <button type="button" class="btn btn-secondary" (click)="limpiarTodo()" data-dismiss="modal">Cerrar</button>
+                <!-- <button type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Obtener Reporte</button> -->
             </div>
         </div>
     </div>

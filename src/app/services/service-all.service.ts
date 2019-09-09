@@ -29,6 +29,11 @@ export class ServiceAllService {
     })
   }
 
+  obtenerAtributos(arrayTags:any){
+    return this.http.post(this.baseUrl + '/admin/atributos/ListarAtributosPersonasTags', arrayTags, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
+    })
+  }
 
   subirImport(peopleImport: any) {
 

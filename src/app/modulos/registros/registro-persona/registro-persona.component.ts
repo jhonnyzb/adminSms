@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
+import { JsonPipe } from '@angular/common';
 
 @Component({
   selector: 'app-registro-persona',
@@ -14,6 +15,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
  
   
   bander: boolean;
+  pageActual: number = 1;
   formularioRegister: FormGroup;
   minlength: number = 10;
   tags: any;
@@ -56,6 +58,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
   getTags() {
     this.tagSusbcribe =  this.Servicio.getTags().subscribe(
       (res)=>{
+        console.log('tag',res)
         this.tags = res;
         this.NumeroTags = this.tags.length;      
       },
@@ -68,6 +71,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
 
   agregar(data: any) {
     var name = {
+      "id": data.id,
       "name": data.nombre_tag
     }
     this.miDataInterior.push(name);  
@@ -129,16 +133,29 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
       email: form.value.mail,
       attributeArray: this.arrayAtributos 
     }
-    
+    localStorage.setItem('arregloTagsRegistroPersona', JSON.stringify(this.miDataInterior) )
+    console.log('datos registro', usuario)
     this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
+        if(res.codigoRespuesta == 1005){
+          console.log(res)
+          this.toastrService.error('Al agregar registro intente nuevamente', 'Error', {
+            timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
+          });
+        }else{
+        console.log(res)
         this.botonCrearComunicacion = true;
         this.Contac = res.persona.numero_telefono;
         this.idtag = res.tags[0].id;
         this.limpiarArray();
+        this.formularioRegister.reset()
+        this.arrayAtributos = [];
+        this.formAtributos();
         this.toastrService.success('Guardado con exito', 'Registro', {
           timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
         });
+        }
+        
       },
       (err)=>{
         this.botonCrearComunicacion = true;       

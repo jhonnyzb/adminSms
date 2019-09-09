@@ -27,10 +27,7 @@
                       <div class="col-md-2 ">
                         <button class="btn btn-white border float-right" data-toggle="dropdown" ><strong>{{textoBoton}}</strong> </button>
                         <div class="dropdown-menu">
-                                <a class="dropdown-item  c-pointer" (click)="agregarAtributoAtexto('cedula')" >Cedula</a>
-                                <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('telefono')" >Telefono</a>
-                                <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('direccion')">Direccion</a>
-                                <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('ciudad')">Ciudad</a>
+                                <a *ngFor="let atributo of arrayAtributos" class="dropdown-item  c-pointer" (click)="agregarAtributoAtexto(atributo.nombre)" >{{atributo.nombre}}</a>
                               </div>
                     </div>
 
@@ -53,17 +50,26 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="ModalReporte" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="ModalReporte"  data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Reporte de envio </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" (click)="limpiarTodo()" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" *ngIf="datarecibida" >
+            <div *ngIf="cargueDatos" class="modal-body text-center">
+                    <img src="../../../../assets/img/loadingList.gif"  alt="Cargando">
+             </div>
+            <div *ngIf="errorEnvioMensaje" class="modal-body">
+                    <div class="alert alert-danger" role="alert">
+                           Error en el proceso de envio, intentelo nuevamente
+                    </div>
+            </div>
+
+            <div class="modal-body" *ngIf="bienEnvioMeensaje" >
                 <div class="row">
                     <div class="col-md-4">
                         <div class="text-center">
@@ -90,16 +96,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 ">                     
-                            <label>Errores {{datarecibida.cantidad_personas_rechazadas}}</label>
+                            <label>Errores {{datarecibida.historia.cantidad_personas_rechazadas}}</label>
                             <div class="progress">
                                 <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-                                    style="width: 30%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                    style="width: 0%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                             </div>                   
                     </div>
                 </div>
                 <div class="row">
                         <div class="col-md-12 ">                     
-                                <label>pendientes {{datarecibida.cantidad_personas_pendientes}}</label>
+                                <label>pendientes {{datarecibida.historia.cantidad_personas_pendientes}}</label>
                                 <div class="progress">
                                     <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -109,8 +115,8 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Obtener Reporte</button>
+                <button type="button" class="btn btn-secondary" (click)="limpiarTodo()"  data-dismiss="modal">Cerrar</button>
+                <!-- <button type="button" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Obtener Reporte</button> -->
             </div>
         </div>
     </div>

@@ -4,7 +4,7 @@
     height: 800px;
 }
 .config{
-    height: 70px;
+    height: 90px;
 }
 label{
     margin-bottom: 0% !important
@@ -13,5 +13,8 @@ label{
     cursor: pointer;
 }
 .dropdown-item{
+    cursor: pointer;
+}
+.c-pointer{
     cursor: pointer;
 }

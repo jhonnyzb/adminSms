@@ -16,3 +16,8 @@ textarea:focus{
 .c-pointer{
     cursor: pointer;
 }
+
+img{
+    width: 30px;
+    height: 30px;
+}

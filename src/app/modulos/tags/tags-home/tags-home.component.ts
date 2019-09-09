@@ -56,8 +56,6 @@ export class TagsHomeComponent implements OnInit {
   saveTags(){
     localStorage.setItem('arraytags',JSON.stringify(this.miDataInterior))
     this.router.navigate(['/usuario/tags/createComunicacionTags']);
-
-
   }
 
 }

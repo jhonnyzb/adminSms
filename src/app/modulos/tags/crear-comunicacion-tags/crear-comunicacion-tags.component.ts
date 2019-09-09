@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ServiceAllService } from 'src/app/services/service-all.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-comunicacion-tags',
@@ -8,16 +9,21 @@ import { ServiceAllService } from 'src/app/services/service-all.service';
   styleUrls: ['./crear-comunicacion-tags.component.css']
 })
 export class CrearComunicacionTagsComponent implements OnInit {
-  arrayenvio = [];
-  arrayTags: any;
+
+
+  arrayenvio: any[] = [];
+  arrayTags: any[];
   datarecibida: any;
   contador: number = 0;
   mensajes: number = 1;
   de: number;
   contenido: string = '';
   textoBoton ='{ }' 
+  errorEnvioMensaje: boolean = false;
+  bienEnvioMeensaje: boolean =  false;
+  cargueDatos: boolean = true;
 
-  constructor( private Servicio: ServiceAllService) { }
+  constructor( private Servicio: ServiceAllService, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit() {
    
@@ -28,22 +34,19 @@ export class CrearComunicacionTagsComponent implements OnInit {
 
   getTag() {
     this.arrayTags = JSON.parse(localStorage.getItem("arraytags"))
-    console.log(this.arrayTags.id)
 
   }
 
   agregarAtributoAtexto(atributo){
-    this.contenido = this.contenido + ' {' + atributo + '} '
+    this.contenido = this.contenido + ' {{' + atributo + '}} '
   }
 
   SendComunicacionMasivo() {
 
     for (var i = 0; i < this.arrayTags.length; i++) {
-      var name = {
-        "id": this.arrayTags[i].id
-      }
+      this.arrayenvio.push({ id : this.arrayTags[i].id})
     }
-    this.arrayenvio.push(name);
+   
     let envio = {
       from: this.de,
       tags: this.arrayenvio,
@@ -52,14 +55,29 @@ export class CrearComunicacionTagsComponent implements OnInit {
     }
     console.log(envio)
     this.Servicio.envioMensaje(envio).subscribe(
-      (res) => {
-        this.datarecibida = res;
-        console.log(this.datarecibida);
+      (res:any) => {
+        console.log(res)
+        this.cargueDatos = false;
+        if (res.codigoRespuesta == 1001) {
+          this.errorEnvioMensaje = true;
+        }else{
+          this.bienEnvioMeensaje = true;
+          this.datarecibida = res;
+        }
       },
       (err) => {
-        console.log(err);
+        this.toastrService.error('Intente Nuevamente o contacte con el administrador del sistema', 'Error conexión servidor', {
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
+        });
       }
     )
+  }
+
+  limpiarTodo(){
+    this.errorEnvioMensaje = false;
+    this.bienEnvioMeensaje = false;
+    this.cargueDatos = true;
+    this.router.navigate(['/usuario/tags'])
   }
 
 
@@ -84,6 +102,9 @@ export class CrearComunicacionTagsComponent implements OnInit {
   }
 
 
+
   
 
 }
+
+

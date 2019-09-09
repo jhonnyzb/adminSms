@@ -70,7 +70,7 @@ export class RegistroHomeComponent implements OnInit {
   getPais(){
 
     this.Servicio.getCountry().subscribe(
-      (res)=>{
+      (res:any)=>{
           this.paises = res;
       },
       (err)=>{

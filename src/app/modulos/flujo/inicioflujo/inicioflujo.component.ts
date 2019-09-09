@@ -1,13 +1,22 @@
-import { Component, OnInit, ɵConsole } from '@angular/core';
+import { Component, OnInit, ɵConsole, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ServiceAllService } from 'src/app/services/service-all.service';
 
 @Component({
   selector: 'app-inicioflujo',
   templateUrl: './inicioflujo.component.html',
   styleUrls: ['./inicioflujo.component.css']
 })
-export class InicioflujoComponent implements OnInit {
+export class InicioflujoComponent implements OnInit, OnDestroy{
 
-  segmentosTags: string = ' Audiencia Segmentos o tags';
+  tagSusbcribe: Subscription;
+  tags: any[];
+  pageActual: number = 1;
+  arrayTagsFlujo: any[]= [];
+  arrayTagsVerflujo: any[] = [];
+ 
+
+  segmentosTags: string = 'Tags';
   unicaAudiencia: boolean = false;
   entradaSms: boolean = false;
   eventosPersonas: boolean = false;
@@ -33,9 +42,10 @@ export class InicioflujoComponent implements OnInit {
   mensajeWhatsappEventosPersonas1: boolean = false;
 
 
-  constructor() { }
+  constructor(private Servicio: ServiceAllService) { }
 
   ngOnInit() {
+    this.getTags();
   }
 
 
@@ -144,8 +154,47 @@ export class InicioflujoComponent implements OnInit {
         this.mensajeSmsEventosPersonas1= event.crearSms;
       }
       
-    }
-     
-      
+    }   
+  }
+
+  getTags() {
+    this.tagSusbcribe =  this.Servicio.getTags().subscribe(
+      (res:any)=>{
+        this.tags = res;  
+      },
+      (err)=>{
+        console.log(err)
+      }
+      )
+  }
+
+
+  agregar(data: any) {
+    this.arrayTagsFlujo.push({name: data.nombre_tag});  
+   
+  }
+
+  quitar(data:any) {
+    this.arrayTagsFlujo = this.arrayTagsFlujo.filter((s)=>{
+      if(s.name == data.nombre_tag){
+        return false;
+      }else{
+        return true;
+      }
+    });
+
+  }
+
+
+  limpiarArray(){
+    console.log(this.arrayTagsFlujo)
+    this.arrayTagsFlujo = [];
+   
+  }
+
+
+
+  ngOnDestroy(){
+    this.tagSusbcribe.unsubscribe();
   }
 }

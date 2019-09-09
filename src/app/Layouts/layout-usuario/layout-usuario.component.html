@@ -9,17 +9,17 @@
         </a>
         <hr class="sidebar-divider my-0">
         <div class="sidebar-heading mt-3">
-           <p class="mb-0 h6" >AGREGAR PERSONAS</p>
+           <p class="mb-0 h6" >ENVIAR SMS</p>
         </div>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/usuario']" routerLinkActive="active"  >
             <i class="fa fa-users"></i>
-            <span>Masivos</span></a>
+            <span>Enviar Sms Masivo</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['personal']" routerLinkActive="active"  >
             <i class="fa fa-user"></i>
-            <span>Individual</span></a>
+            <span>Enviar Sms Individual</span></a>
         </li>
         <hr class="sidebar-divider">
         <div class="sidebar-heading mt-3">
@@ -31,7 +31,7 @@
           <span class="disabled">Flujo de comunicación</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled"  [routerLink]="['flow_2']" routerLinkActive="active"  >
+        <a class="nav-link"  [routerLink]="['flow_2']" routerLinkActive="active"  >
           <i class="fa fa-tags "></i>
           <span class="disabled">Flujo de comunicación_2</span></a>
       </li>
@@ -99,7 +99,7 @@
   
                 <div class="dropdown-menu dropdown-menu-right shadow" aria-labelledby="userDropdown">
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" (click)="logout()" >
+                  <a class="dropdown-item c-pointer" (click)="logout()" >
                     <i class="fa fa-sign-out mr-2" aria-hidden="true" ></i>
                     Cerrar sesion
                   </a>

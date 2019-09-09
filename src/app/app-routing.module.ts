@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: LayoutLoginComponent
   },
   {
-    path: 'usuario', component: LayoutUsuarioComponent, //canActivate: [AdminGuard],
+    path: 'usuario', component: LayoutUsuarioComponent, canActivate: [AdminGuard],
     children:[
       {
         path: '',
@@ -29,12 +29,17 @@ const routes: Routes = [
         loadChildren: ()=> import ('./modulos/flujo/flujo.module').then(m=>m.FlujoModule)
       }
     ]
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

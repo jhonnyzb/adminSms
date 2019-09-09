@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-crear-comunicacion',
@@ -12,7 +12,6 @@ import { Subscription } from 'rxjs';
 export class CrearComunicacionComponent implements OnInit, OnDestroy {
   contac: string= '';
   idtag: number;
-  formularioComunicacion: FormGroup;
   Para: string = '';
   De: string = '';
   datarecibida: any;
@@ -23,26 +22,25 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   descripcion:string = ''; 
   de: number;    
   textoBoton ='{ }' 
+  errorEnvioMensaje: boolean = false;
+  bienEnvioMeensaje: boolean =  false;
+  cargueDatos: boolean = true;
+  arrayAtributos: any[];
+  contadorAtributos: number = 0;
+  tags: any;
   
 
-  constructor(private Routed: ActivatedRoute, private Formbuilder: FormBuilder, private Servicio: ServiceAllService) {
+  constructor(private Routed: ActivatedRoute, private Servicio: ServiceAllService, private toastrService: ToastrService, private router: Router ) {
     this.contac = this.Routed.snapshot.paramMap.get('id');
     this.idtag = Number(this.Routed.snapshot.paramMap.get('idtag'));
   }
 
   ngOnInit() {
-    //this.buildForm();
+    this.obtenerAtributos();
+   
   }
 
-  private buildForm() {
 
-    this.formularioComunicacion = this.Formbuilder.group(
-      {
-        //de:['', Validators.required],
-        //nombreCampaña: ['', Validators.required]
-      }
-    )
-  }
 
   changePara(e: any) {
     this.Para = e.target.value;
@@ -54,22 +52,36 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
 
 
   agregarAtributoAtexto(atributo){
-    this.descripcion = this.descripcion + ' {' + atributo + '} '
+    this.contadorAtributos = this.contadorAtributos + 1
+    this.descripcion = this.descripcion + ' {{' + atributo + '}} '
+
   }
 
 
   SendComunicacion(){
+    let arrayTags  = JSON.parse(localStorage.getItem('arregloTagsRegistroPersona'))
     let envio = {
       from: this.de,
-      tags: [ {id :this.idtag}],
+      tags: arrayTags,
       texto: this.descripcion,
-      numero_atributos: 1
+      numero_atributos: this.contadorAtributos
     }
     console.log(envio)
     this.EnvioMensajeSuscription =  this.Servicio.envioMensaje(envio).subscribe(
       (res:any)=>{
         console.log(res)
-        this.datarecibida = res;
+        this.cargueDatos = false;
+        if (res.codigoRespuesta == 1001) {
+          this.errorEnvioMensaje = true;
+        }else{
+          this.bienEnvioMeensaje = true;
+          this.datarecibida = res;
+        }     
+      },(erro)=>{
+          this.toastrService.error('Intente Nuevamente o contacte con el administrador del sistema', 'Error conexión servidor', {
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
+        });
+
       }
     )
   }
@@ -104,7 +116,40 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
     
   }
 
+  limpiarTodo(){
+    this.errorEnvioMensaje = false;
+    this.bienEnvioMeensaje = false;
+    this.cargueDatos = true;
+    this.router.navigate(['/usuario/personal'])
 
+  }
+
+  obtenerAtributos(){
+    let arrayTags  = JSON.parse(localStorage.getItem('arregloTagsRegistroPersona'))
+    
+    if (  arrayTags == []) {
+      console.log('menor a 0')
+      this.tags = {
+        tags: [this.idtag]
+      }
+    }else{
+      this.tags = {
+        tags: arrayTags
+      }
+    }
+    
+    console.log(this.tags)
+    this.Servicio.obtenerAtributos(this.tags).subscribe(
+      (res: any)=>{
+        console.log(res)
+        this.arrayAtributos = res
+      },
+      (err)=>
+      {
+        console.log('error getatributos', err)
+      }
+    )
+  }
 
 ngOnDestroy(){
   if(this.AddComSubscription){
