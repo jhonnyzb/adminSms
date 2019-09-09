@@ -1,3 +1,6 @@
+<div *ngIf="loader" class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
@@ -8,15 +11,15 @@
             </div>
             <form class="ml-5 mr-5 mt-5 pb-5 " [formGroup]="formularioLogin" (ngSubmit)="onLogin(formularioLogin)">
                 <div class="form-group mt-5">
-                    <label>NOMBRE USUARIO </label>
-                    <input type="text" class="form-control" placeholder="Username" formControlName="userName">
+                    <label>Nombre usuario</label>
+                    <input type="text" class="input1" formControlName="userName">
                     <div *ngIf="getError('userName')" class="alert alert-danger mt-1" role="alert">
                         Campo Requerido
                     </div>
                 </div>
                 <div class="form-group mt-3">
-                    <label>CONTRASEÑA</label>
-                    <input type="password" class="form-control" placeholder="Password" formControlName="password">
+                    <label>Contraseña</label>
+                    <input type="password" class="input1" formControlName="password">
                     <div *ngIf="getError('password')" class="alert alert-danger mt-1" role="alert">
                         Minimo {{minlength}} Caracteres
                     </div>
@@ -29,6 +32,7 @@
                         ¿Olvido su contraseña?
                     </a>
                 </div>
+              
 
                 <div class="mt-4">
                     <button type="submit" class="btn btn-info btn-block" [disabled]="formularioLogin.invalid">Iniciar
@@ -60,6 +64,8 @@
                         <div *ngIf="getErrorReset('mailReset')" class="alert alert-danger mt-1" role="alert">
                             Email invalido
                         </div>
+                      
+
                     </div>
                     <div class="modal-footer">
                         <button data-dismiss="modal" (click)="clear(formularioReset)"
@@ -72,3 +78,5 @@
         </div>
     </div>
 </div>
+
+

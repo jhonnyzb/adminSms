@@ -8,14 +8,11 @@
 .cursor{
     cursor: pointer;
 }
-.reauth-email{  
-    display: block;
-    color: red;
-    line-height: 2;
-    margin-bottom: 10px;
-    font-size: 14px;
-    text-align: left;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap; 
+.input1{
+    width: 100%;
+    padding: 2px 20px;
+    margin: 0px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid rgb(23, 162, 184)
 }

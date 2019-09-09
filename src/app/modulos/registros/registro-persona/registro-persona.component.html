@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="d-inline text-info h4"> Registro Persona</div>
             <div class="d-inline  text-info float-right">
-                <button class="btn btn-info  mb-1" [disabled]="formularioRegister.invalid"
+                <button class="btn btn-info  mb-1" [disabled]="!botonCrearComunicacion"
                     [routerLink]="['/usuario/comunicacion', Contac,idtag]"><span
                         class="fa fa-plus-square"></span>&nbsp;Crear Comunicación
                 </button>
@@ -14,26 +14,26 @@
         <form [formGroup]="formularioRegister" class="w-100">
             <div class="form-group">
                 <label>Nombre</label>
-                <input type="text" class="form-control" placeholder="Digite Nombre" formControlName="name">
+                <input type="text" class="input1" placeholder="Digite Nombre" formControlName="name">
                 <div *ngIf="getError('name')" class="alert alert-danger mt-1" role="alert">
                     Campo Requerido
                 </div>
             </div><br>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control" placeholder="Digite Email" formControlName="mail">
+                <input type="email" class="input1" placeholder="Digite Email" formControlName="mail">
                 <div *ngIf="getError('mail')" class="alert alert-danger mt-1" role="alert">
                     email invalido
                 </div>
             </div><br>
             <div class="row pl-3 mb-3">
-                <label (click)="formAtributos()" class="fa fa-plus-circle  c-pointer mr-2"> Agregar atributos</label>
-                <label (click)="eliminarAtributosTodo()" class="fa fa-minus-circle  c-pointer"> Eliminar atributos</label>
+                    <button type="button" (click)="formAtributos()" class="btn btn-success btn-sm fa fa-plus-circle"> Agregar Atributo</button>&nbsp;
+                    <button type="button" (click)="eliminarAtributosTodo()" class="btn btn-danger btn-sm fa fa-trash"> Eliminar Atributos</button>
             </div>
             <div *ngIf="formAtributosVer" class="form-row">
                 <div class="form-group col-md-5">
                     <label>Atributo</label>
-                    <input type="text" class="form-control" formControlName="atributo">
+                    <input type="text" class="input1" formControlName="atributo">
                     <div *ngIf="getError('atributo')" class="alert alert-danger mt-1" role="alert">
                         Error de Atributo
                     </div>
@@ -41,23 +41,24 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label>Valor</label>
-                    <input type="text" class="form-control" formControlName="valor">
+                    <input type="text" class="input1" formControlName="valor">
                     <div *ngIf="getError('valor')" class="alert alert-danger mt-1" role="alert">
                         Error en el valor
                     </div>
                 </div>
-                <div class="form-group col-md-3 pt-p">
-                    <button class="btn btn-info btn-block" (click)="formularioAtributos(formularioRegister)"><i
-                            class="fa fa-plus-circle"></i> Agregar</button>
+                <div class="form-group col-md-3 pt-p text-center">
+                    <button class="btn btn-success btn-sm " (click)="formularioAtributos(formularioRegister)"><i
+                            class="fa fa-plus-circle"></i></button>
                 </div>
             </div>
             <div class="form-row"  >
                 <table class="table table-sm">
                     <tbody>
                         <tr *ngFor="let atributo of arrayAtributos; let k = index">
+                            <td class="text-center">{{k+1}}</td>
                             <td class="text-center">{{atributo.nombre}}</td>
                             <td class="text-center">{{atributo.valor}}</td>
-                            <td class="text-center"><span class="fa fa-trash text-danger c-pointer" (click)="eliminarAtributo(k)" > Eliminar</span></td>
+                            <td class="text-center"><button class="btn btn-danger btn-sm " (click)="eliminarAtributo(k)"><span class="fa fa-minus-circle"></span></button></td>
                         </tr>
                     </tbody>
                 </table>
@@ -73,7 +74,7 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">Telefono</label>
-                    <input type="text" class="form-control" formControlName="telefono">
+                    <input type="text" class="input1" formControlName="telefono">
                     <div *ngIf="getError('telefono')" class="alert alert-danger mt-1" role="alert">
                         Error de telefono
                     </div>

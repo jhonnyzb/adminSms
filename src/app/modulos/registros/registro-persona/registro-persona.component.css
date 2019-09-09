@@ -2,9 +2,18 @@ p{
     margin-bottom: 0;
    }
    
-   .c-pointer{
+.c-pointer{
        cursor: pointer;
    }
-   .pt-p{
+.pt-p{
        margin-top: 32px
    }
+
+.input1{
+    width: 100%;
+    padding: 2px 20px;
+    margin: 0px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid rgb(23, 162, 184)
+}

@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class RegistroPersonaComponent implements OnInit, OnDestroy {
 
  
-
+  
   bander: boolean;
   formularioRegister: FormGroup;
   minlength: number = 10;
@@ -25,6 +25,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
   idtag: number;
   arrayAtributos: any[]= [];
   formAtributosVer: boolean = false;
+  botonCrearComunicacion: boolean = false;
   
 
   tagSusbcribe: Subscription;
@@ -47,7 +48,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
         telefono: ['', [Validators.required, Validators.minLength(this.minlength), Validators.pattern(/^[0-9]+$/)]],
         mail: ['', [Validators.pattern(/^[^@]+@[^@]+\.[a-zA-Z]{2,}$/)]],
         atributo:[''],
-        valor:[]
+        valor:['']
       }
     )
   }
@@ -112,7 +113,6 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
       valor: form.value.valor
     }
     this.arrayAtributos.push(atributos)
-    console.log(this.arrayAtributos)
     let atribu = this.formularioRegister.get('atributo')
     let valor = this.formularioRegister.get('valor')
     atribu.reset();
@@ -129,21 +129,21 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
       email: form.value.mail,
       attributeArray: this.arrayAtributos 
     }
-    console.log(usuario)
+    
     this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
-        console.log(res)
+        this.botonCrearComunicacion = true;
         this.Contac = res.persona.numero_telefono;
         this.idtag = res.tags[0].id;
         this.limpiarArray();
         this.toastrService.success('Guardado con exito', 'Registro', {
-          timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
         });
       },
       (err)=>{
-        console.log(err)
+        this.botonCrearComunicacion = true;       
         this.toastrService.error('En la conexion con base de datos', 'Error', {
-          timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
         });
 
       }
@@ -170,7 +170,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
      this.arrayAtributos = [];
    }
 
-  //Metodo deteccion error  formulario Login input userName y Password 
+ 
   public getError(controlName: string): boolean {
     let error = false;
     if (controlName == 'name') {

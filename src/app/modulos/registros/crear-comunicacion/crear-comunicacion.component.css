@@ -1,15 +1,18 @@
-.color{
-    color: green;
+.input1{
+    width: 100%;
+    padding: 2px 20px;
+    margin: 0px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid rgb(23, 162, 184)
 }
-.color1{
-    color: blue;
+
+textarea:focus{
+    border-color: rgb(255, 255, 255);
+    box-shadow: 0 0px 0px rgba(255, 255, 255)inset, 0 0 0px rgba(255, 255, 255);
+    outline: 0 none !important;
 }
-.color2{
-    color: yellow;
-}
-.color3{
-    color: orange;
-}
-.color4{
-    color: red;
+
+.c-pointer{
+    cursor: pointer;
 }

@@ -20,6 +20,9 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   EnvioMensajeSuscription: Subscription;
   contador: number = 0;
   mensajes: number = 1;
+  descripcion:string = ''; 
+  de: number;    
+  textoBoton ='{ }' 
   
 
   constructor(private Routed: ActivatedRoute, private Formbuilder: FormBuilder, private Servicio: ServiceAllService) {
@@ -28,16 +31,15 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.buildForm();
+    //this.buildForm();
   }
 
   private buildForm() {
 
     this.formularioComunicacion = this.Formbuilder.group(
       {
-        de:['', Validators.required],
-        descripcion: ['', Validators.required],
-        nombreCampaña: ['', Validators.required]
+        //de:['', Validators.required],
+        //nombreCampaña: ['', Validators.required]
       }
     )
   }
@@ -51,11 +53,16 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
   }
 
 
-  SendComunicacion(form:any){
+  agregarAtributoAtexto(atributo){
+    this.descripcion = this.descripcion + ' {' + atributo + '} '
+  }
+
+
+  SendComunicacion(){
     let envio = {
-      from: form.value.de,
+      from: this.de,
       tags: [ {id :this.idtag}],
-      texto: form.value.descripcion,
+      texto: this.descripcion,
       numero_atributos: 1
     }
     console.log(envio)
@@ -85,7 +92,19 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
     else if (this.contador <= 1120) {
       this.mensajes = 7
     }
+    else if (this.contador <= 1280) {
+      this.mensajes = 8
+    }
+    else if (this.contador <= 1440) {
+      this.mensajes = 9
+    }
+    else if (this.contador <= 1600) {
+      this.mensajes = 10
+    }
+    
   }
+
+
 
 ngOnDestroy(){
   if(this.AddComSubscription){

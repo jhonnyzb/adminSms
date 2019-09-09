@@ -19,6 +19,9 @@ export class RegistroHomeComponent implements OnInit {
   archivoSubir: any;
   paises: any;
   peopleMasivo: any;
+  ArchivoVacio: boolean = false;
+  extensionArhivo: boolean = false;
+  
   
   constructor(private Servicio: ServiceAllService,private Formbuilder: FormBuilder) { }
 
@@ -34,20 +37,24 @@ export class RegistroHomeComponent implements OnInit {
     this.formularioImpor = this.Formbuilder.group(
       {
         tag: ['', Validators.required],
-        delimitador: ['',Validators.required]
+        delimitador: ['',[Validators.required,Validators.pattern(/^[,;]+$/),Validators.maxLength(1)]]
       }
     )
   }
 
 
   onFileChange(event){
+    this.ArchivoVacio = true;
     const file = event.target.files[0];
     const extension = file.type.split('/')[1].toLowerCase();
-    if (extension !== 'csv'){
+    if (extension !== 'csv' && extension !== 'vnd.ms-excel'){
       event.target.value = '';
+      this.nameArchivoCsv = file.name;
+      this.extensionArhivo = false;
       this.validatefileUpload = '*Formato no valido';
      }else{
-      this.nameArchivoCsv = file.name + ' subido';
+      this.extensionArhivo = true;
+      this.nameArchivoCsv = file.name;
       this.getBase64(file).then(
         (res)=>{
           this.archivoSubir = res;
@@ -73,7 +80,6 @@ export class RegistroHomeComponent implements OnInit {
   }
 
   changepais(e: any) {
-    console.log(e)
     this.pais = e.target.value
 
   }
@@ -90,7 +96,6 @@ export class RegistroHomeComponent implements OnInit {
     this.Servicio.subirImport(peopleImport).subscribe(
       (res:any)=>{
         this.peopleMasivo = res.personas
-          console.log('res', res.personas)
       },
       (err)=>{
         console.log(err)
@@ -101,6 +106,10 @@ export class RegistroHomeComponent implements OnInit {
 
   limpiarForm(){
     this.formularioImpor.reset();
+    this.validatefileUpload = '';
+    this.nameArchivoCsv = 'Ningun Archivo seleccionado'
+    this.extensionArhivo = false;
+  
   }
 
 

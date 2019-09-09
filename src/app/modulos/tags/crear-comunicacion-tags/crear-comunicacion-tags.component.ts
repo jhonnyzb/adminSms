@@ -10,28 +10,21 @@ import { ServiceAllService } from 'src/app/services/service-all.service';
 export class CrearComunicacionTagsComponent implements OnInit {
   arrayenvio = [];
   arrayTags: any;
-  formularioComuMasiva: FormGroup;
   datarecibida: any;
   contador: number = 0;
   mensajes: number = 1;
+  de: number;
+  contenido: string = '';
+  textoBoton ='{ }' 
 
-  constructor(private Formbuilder: FormBuilder, private Servicio: ServiceAllService) { }
+  constructor( private Servicio: ServiceAllService) { }
 
   ngOnInit() {
-    this.buildForm();
+   
     this.getTag();
   }
 
-  private buildForm() {
-
-    this.formularioComuMasiva = this.Formbuilder.group(
-      {
-        de: ['', Validators.required],
-        contenido: ['', Validators.required]
-      }
-    )
-  }
-
+ 
 
   getTag() {
     this.arrayTags = JSON.parse(localStorage.getItem("arraytags"))
@@ -39,7 +32,11 @@ export class CrearComunicacionTagsComponent implements OnInit {
 
   }
 
-  SendComunicacionMasivo(form: any) {
+  agregarAtributoAtexto(atributo){
+    this.contenido = this.contenido + ' {' + atributo + '} '
+  }
+
+  SendComunicacionMasivo() {
 
     for (var i = 0; i < this.arrayTags.length; i++) {
       var name = {
@@ -48,9 +45,9 @@ export class CrearComunicacionTagsComponent implements OnInit {
     }
     this.arrayenvio.push(name);
     let envio = {
-      from: form.value.de,
+      from: this.de,
       tags: this.arrayenvio,
-      texto: form.value.contenido,
+      texto: this.contenido,
       numero_atributos: 1
     }
     console.log(envio)
@@ -86,5 +83,7 @@ export class CrearComunicacionTagsComponent implements OnInit {
     }
   }
 
+
+  
 
 }

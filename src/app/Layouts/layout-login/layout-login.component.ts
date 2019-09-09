@@ -16,6 +16,7 @@ export class LayoutLoginComponent implements OnInit {
   formularioLogin: FormGroup;
   minlength: number = 3;
   formularioReset: FormGroup;
+  loader: boolean = false;
 
   constructor(private Formbuilder: FormBuilder, private toastrService: ToastrService,private router: Router, private Services: ServiceAllService ) { }
 
@@ -49,22 +50,26 @@ export class LayoutLoginComponent implements OnInit {
 
    //Metodo acceder al servicio del login
    public onLogin(forms: FormGroup) {
+    this.loader = true;
     this.dataLoginSubscription = this.Services.login(forms.value.userName, forms.value.password).subscribe(
       (res: any) => {    
         console.log(res)  
-        if (res.codigoRespuesta === 1001) {       
+        if (res.codigoRespuesta === 1001) {  
+          this.loader = false;     
             this.toastrService.error('Compruebe las credenciales', 'Error', {
-            timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'
+            timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
           });
        } else {
-
+        this.loader = false;
          localStorage.setItem('token',res.access_token)
          this.router.navigate(['usuario'])
        }
 
       }, (erro) => {
+        //this.router.navigate(['usuario'])
+        this.loader = false;
         this.toastrService.error('Conexion Base de datos', 'Error', {
-          timeOut: 1500, positionClass: 'toast-bottom-center', progressBar: true, progressAnimation: 'decreasing'
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
         });
       })
   }

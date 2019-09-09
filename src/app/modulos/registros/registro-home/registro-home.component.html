@@ -61,7 +61,7 @@
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle"><i class="fa fa-upload text-info"></i> Importar
             personas</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <button type="button" class="close" (click)="limpiarForm()" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
@@ -70,14 +70,16 @@
                 <div class="custom-file">
                   <input type="file" class="custom-file-input" (change)="onFileChange($event)" >
                   <label class="custom-file-label" for="customFile">{{nameArchivoCsv}}</label>
-                  <span class="reauth-email">{{validatefileUpload}}</span>
+                  <div *ngIf="validatefileUpload !== ''" class="alert alert-danger mt-1" role="alert">
+                        {{validatefileUpload}}
+                 </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group mt-1">
                     <label for="message-text" class="col-form-label"><i
                             class="fa fa-tag text-info"></i>Delimitador</label>
                     <input type="text" class="form-control" formControlName="delimitador">
                     <div *ngIf="getError('delimitador')" class="alert alert-danger mt-1" role="alert">
-                        Campo Requerido
+                        Campo Requerido o Caracter invalido
                     </div>
                 </div>
                 <div class="form-group">
@@ -91,7 +93,7 @@
                 </div>
                 <div class="form-group">
                     <label for="message-text" class="col-form-label"><i class="fa fa-tag text-info"></i> Nombre Tag</label>
-                    <input type="text" class="form-control" formControlName="tag">
+                    <input type="text" class="input1" formControlName="tag">
                     <div *ngIf="getError('tag')" class="alert alert-danger mt-1" role="alert">
                             Campo Requerido
                         </div>
@@ -101,7 +103,7 @@
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="limpiarForm()"
             data-dismiss="modal">Cerrar</button>
-            <button type="button" class="btn btn-info" [disabled]="formularioImpor.invalid"  data-dismiss="modal" (click)="sendImport(formularioImpor)">Enviar</button>
+            <button type="button" class="btn btn-info" *ngIf="!formularioImpor.invalid && ArchivoVacio && extensionArhivo" data-dismiss="modal" (click)="sendImport(formularioImpor)">Enviar</button>
      </div>
       </div>
     </div>
