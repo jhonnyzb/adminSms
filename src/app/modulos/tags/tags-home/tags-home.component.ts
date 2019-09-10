@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-tags-home',
@@ -15,7 +16,7 @@ export class TagsHomeComponent implements OnInit {
   filterTags:any
   nombreTag: string;
 
-  constructor(private Servicio: ServiceAllService, private router: Router) { }
+  constructor(private Servicio: ServiceAllService, private router: Router,private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getTags();
@@ -60,8 +61,10 @@ export class TagsHomeComponent implements OnInit {
 
   guardarTag(){
     this.Servicio.crearTag({ name: this.nombreTag}).subscribe(
-      (res:any)=>{
-        console.log('creado', res)
+      (res:any)=>{ 
+        this.toastrService.success('creado satisfactoriamente', 'tag', {
+          timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
+        });    
         this.getTags()
       },
       (err)=>{
