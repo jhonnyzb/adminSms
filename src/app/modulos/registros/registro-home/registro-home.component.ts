@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServiceAllService } from 'src/app/services/service-all.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registro-home',
@@ -23,7 +24,7 @@ export class RegistroHomeComponent implements OnInit {
   extensionArhivo: boolean = false;
   
   
-  constructor(private Servicio: ServiceAllService,private Formbuilder: FormBuilder) { }
+  constructor(private Servicio: ServiceAllService,private Formbuilder: FormBuilder,private toastrService: ToastrService) { }
 
   ngOnInit() {
     //this.getDataPeopleMasivo();
@@ -95,6 +96,13 @@ export class RegistroHomeComponent implements OnInit {
     console.log(peopleImport)
     this.Servicio.subirImport(peopleImport).subscribe(
       (res:any)=>{
+        console.log(res)
+        if(res.codigoRespuesta == 1005){
+
+        }else{
+          this.peopleMasivo = res.personas
+        }
+       
         this.peopleMasivo = res.personas
       },
       (err)=>{

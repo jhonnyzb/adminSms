@@ -91,6 +91,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
 
     this.paisSusbcribe = this.Servicio.getCountry().subscribe(
       (res)=>{
+        console.log(res)
           this.paises = res;
       },
       (err)=>{
@@ -135,6 +136,7 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
     localStorage.setItem('arregloTagsRegistroPersona', JSON.stringify(this.miDataInterior) )
     this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
+        console.log(res)
         if(res.codigoRespuesta == 1005){          
           this.toastrService.error('Al agregar registro intente nuevamente', 'Error', {
             timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'

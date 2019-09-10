@@ -13,6 +13,7 @@ export class TagsHomeComponent implements OnInit {
   miDataInterior = [];
   bcrearcomun: boolean = false
   filterTags:any
+  nombreTag: string;
 
   constructor(private Servicio: ServiceAllService, private router: Router) { }
 
@@ -23,8 +24,7 @@ export class TagsHomeComponent implements OnInit {
   getTags() {
     this.Servicio.getTags().subscribe(
       (res)=>{
-        this.tags = res;
-       
+        this.tags = res;  
       },
       (err)=>{
         console.log(err)
@@ -56,6 +56,19 @@ export class TagsHomeComponent implements OnInit {
   saveTags(){
     localStorage.setItem('arraytags',JSON.stringify(this.miDataInterior))
     this.router.navigate(['/usuario/tags/createComunicacionTags']);
+  }
+
+  guardarTag(){
+    this.Servicio.crearTag({ name: this.nombreTag}).subscribe(
+      (res:any)=>{
+        console.log('creado', res)
+        this.getTags()
+      },
+      (err)=>{
+        console.log('no creado erro', err)
+      }
+    )
+
   }
 
 }

@@ -53,8 +53,9 @@ export class LayoutLoginComponent implements OnInit {
     this.loader = true;
     this.dataLoginSubscription = this.Services.login(forms.value.userName, forms.value.password).subscribe(
       (res: any) => {    
+        console.log(res)
         if (res.codigoRespuesta === 1001) {  
-          this.loader = false;     
+          this.loader = false;   
             this.toastrService.error('Compruebe las credenciales', 'Error', {
             timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
           });
@@ -65,9 +66,8 @@ export class LayoutLoginComponent implements OnInit {
        }
 
       }, (erro) => {
-        this.router.navigate(['usuario'])
         this.loader = false;
-        this.toastrService.error('Conexion no autorizada ', 'Error', {
+        this.toastrService.error('Conexion no autorizada con el servidor', 'Error', {
           timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
         });
       })

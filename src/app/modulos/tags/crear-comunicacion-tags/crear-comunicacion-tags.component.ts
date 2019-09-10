@@ -22,12 +22,16 @@ export class CrearComunicacionTagsComponent implements OnInit {
   errorEnvioMensaje: boolean = false;
   bienEnvioMeensaje: boolean =  false;
   cargueDatos: boolean = true;
+  tags: any;
+  arrayAtributos: any[];
+  contadorAtributos: number = 0;
 
   constructor( private Servicio: ServiceAllService, private toastrService: ToastrService, private router: Router) { }
 
   ngOnInit() {
    
     this.getTag();
+    this.obtenerAtributos();
   }
 
  
@@ -38,6 +42,7 @@ export class CrearComunicacionTagsComponent implements OnInit {
   }
 
   agregarAtributoAtexto(atributo){
+    this.contadorAtributos = this.contadorAtributos + 1
     this.contenido = this.contenido + ' {{' + atributo + '}} '
   }
 
@@ -51,7 +56,7 @@ export class CrearComunicacionTagsComponent implements OnInit {
       from: this.de,
       tags: this.arrayenvio,
       texto: this.contenido,
-      numero_atributos: 1
+      numero_atributos: this.contadorAtributos
     }
     console.log(envio)
     this.Servicio.envioMensaje(envio).subscribe(
@@ -72,6 +77,22 @@ export class CrearComunicacionTagsComponent implements OnInit {
       }
     )
   }
+
+
+  obtenerAtributos(){
+   
+    this.Servicio.obtenerAtributos({tags: this.arrayTags}).subscribe(
+      (res: any)=>{
+        console.log(res) 
+        this.arrayAtributos = res
+      },
+      (err)=>
+      {
+        console.log('error getatributos', err)
+      }
+    )
+  }
+
 
   limpiarTodo(){
     this.errorEnvioMensaje = false;

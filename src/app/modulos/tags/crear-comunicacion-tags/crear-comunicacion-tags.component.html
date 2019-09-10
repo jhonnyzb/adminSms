@@ -30,10 +30,7 @@
                         <div class="col-md-2">
                                 <button class="btn btn-white border float-right" data-toggle="dropdown" ><strong>{{textoBoton}}</strong> </button>
                                 <div class="dropdown-menu">
-                                        <a class="dropdown-item  c-pointer" (click)="agregarAtributoAtexto('cedula')" >Cedula</a>
-                                        <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('telefono')" >Telefono</a>
-                                        <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('direccion')">Direccion</a>
-                                        <a class="dropdown-item  c-pointer"  (click)="agregarAtributoAtexto('ciudad')">Ciudad</a>
+                                    <a *ngFor="let atributo of arrayAtributos" class="dropdown-item  c-pointer" (click)="agregarAtributoAtexto(atributo.nombre)" >{{atributo.nombre}}</a>
                                 </div>
                         </div>
                     </div>

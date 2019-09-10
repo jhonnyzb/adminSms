@@ -68,6 +68,14 @@ export class ServiceAllService {
     })
   }
 
+  crearTag(tag) {
+    return this.http.post(this.baseUrl + '/admin/tags/createTag', tag, {
+      headers: new HttpHeaders().set('Authorization', 'Bearer ' + localStorage.getItem("token")),
+    })
+  }
+
+
+
   dataOpciones() {
     let opciones =
       [

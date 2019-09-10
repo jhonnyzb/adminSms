@@ -1,7 +1,7 @@
 .panel{
     background-color: #ededed;
     padding: 5px; 
-    height: 800px;
+    height: 900px;
 }
 .config{
     height: 90px;
@@ -17,4 +17,17 @@ label{
 }
 .c-pointer{
     cursor: pointer;
+}
+
+.input1{
+    width: 100%;
+    padding: 2px 20px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid rgb(23, 162, 184)
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
 }

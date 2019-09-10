@@ -136,8 +136,10 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
         tags: [{id: this.idtag}]
       }
     }
+    console.log(this.tags)
     this.Servicio.obtenerAtributos(this.tags).subscribe(
       (res: any)=>{
+        console.log(res)
         this.arrayAtributos = res
       },
       (err)=>
