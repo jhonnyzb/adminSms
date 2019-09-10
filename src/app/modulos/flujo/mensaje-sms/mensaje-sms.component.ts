@@ -13,9 +13,9 @@ export class MensajeSmsComponent implements OnInit {
   contenidoMensaje: string = 'Texto';
   
   @Input() ideSmsUnica: string;
-
-
   @Output() public eventoSms = new EventEmitter<any>();
+
+  
 
   constructor(private servicios: ServiceAllService) { }
 

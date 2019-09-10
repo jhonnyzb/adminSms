@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', component: LayoutLoginComponent
   },
   {
-    path: 'usuario', component: LayoutUsuarioComponent, canActivate: [AdminGuard],
+    path: 'usuario', component: LayoutUsuarioComponent, //canActivate: [AdminGuard],
     children:[
       {
         path: '',

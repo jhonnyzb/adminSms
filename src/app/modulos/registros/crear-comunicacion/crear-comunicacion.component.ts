@@ -59,10 +59,10 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
 
 
   SendComunicacion(){
-    let arrayTags  = JSON.parse(localStorage.getItem('arregloTagsRegistroPersona'))
+  
     let envio = {
       from: this.de,
-      tags: arrayTags,
+      tags: this.tags.tags,
       texto: this.descripcion,
       numero_atributos: this.contadorAtributos
     }
@@ -124,24 +124,20 @@ export class CrearComunicacionComponent implements OnInit, OnDestroy {
 
   }
 
+
   obtenerAtributos(){
     let arrayTags  = JSON.parse(localStorage.getItem('arregloTagsRegistroPersona'))
-    
-    if (  arrayTags == []) {
-      console.log('menor a 0')
-      this.tags = {
-        tags: [this.idtag]
-      }
-    }else{
+    if (  arrayTags.length > 0 ) {
       this.tags = {
         tags: arrayTags
+      }    
+    }else{
+      this.tags = {
+        tags: [{id: this.idtag}]
       }
     }
-    
-    console.log(this.tags)
     this.Servicio.obtenerAtributos(this.tags).subscribe(
       (res: any)=>{
-        console.log(res)
         this.arrayAtributos = res
       },
       (err)=>

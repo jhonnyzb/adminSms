@@ -58,7 +58,6 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
   getTags() {
     this.tagSusbcribe =  this.Servicio.getTags().subscribe(
       (res)=>{
-        console.log('tag',res)
         this.tags = res;
         this.NumeroTags = this.tags.length;      
       },
@@ -134,16 +133,13 @@ export class RegistroPersonaComponent implements OnInit, OnDestroy {
       attributeArray: this.arrayAtributos 
     }
     localStorage.setItem('arregloTagsRegistroPersona', JSON.stringify(this.miDataInterior) )
-    console.log('datos registro', usuario)
     this.registerSusbcribe = this.Servicio.saveRegister(usuario).subscribe(
       (res:any)=>{
-        if(res.codigoRespuesta == 1005){
-          console.log(res)
+        if(res.codigoRespuesta == 1005){          
           this.toastrService.error('Al agregar registro intente nuevamente', 'Error', {
             timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
           });
         }else{
-        console.log(res)
         this.botonCrearComunicacion = true;
         this.Contac = res.persona.numero_telefono;
         this.idtag = res.tags[0].id;

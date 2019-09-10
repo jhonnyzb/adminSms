@@ -14,7 +14,6 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
   pageActual: number = 1;
   arrayTagsFlujo: any[]= [];
   arrayTagsVerflujo: any[] = [];
- 
 
   segmentosTags: string = 'Tags';
   unicaAudiencia: boolean = false;
@@ -30,6 +29,13 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
   mensajeSmsAudienciaUnica1: boolean = false;
   mensajeSmsEntradaSms1: boolean = false;
   mensajeSmsEventosPersonas1: boolean = false;
+
+
+  mensajeSmsAudienciaUnica2: boolean = false;
+  mensajeSmsEntradaSms2: boolean = false;
+  mensajeSmsEventosPersonas2: boolean = false;
+
+
 
 
 
@@ -63,9 +69,8 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
   }
 
 
-  
-
   borrarUnicaAudiencia(){ 
+    this.mensajeSmsAudienciaUnica2 = false;
     this.mensajeSmsAudienciaUnica1 = false;
     this.mensajeSmsAudienciaUnica = false;
     this.unicaAudiencia = false; 
@@ -75,12 +80,14 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
     this.entradaSms = false;
     this.mensajeSmsEntradaSms = false;
     this.mensajeSmsEntradaSms1 = false;
+    this.mensajeSmsEntradaSms2 = false;
   }
 
   borrarEventosPersonas(){
     this.eventosPersonas = false;
     this.mensajeSmsEventosPersonas = false
     this.mensajeSmsEventosPersonas1 = false
+    this.mensajeSmsEventosPersonas2 = false
   }
 
 
@@ -128,11 +135,17 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
       if (event.ideSmsUnica === 'smsUnica1') {
         this.mensajeSmsAudienciaUnica1 = event.borrar;
       }
+      if (event.ideSmsUnica === 'smsUnica2') {
+        this.mensajeSmsAudienciaUnica2 = event.borrar;
+      }
       if (event.ideSmsUnica === 'smsEntrada') {
         this.mensajeSmsEntradaSms= event.borrar;
       }
       if (event.ideSmsUnica === 'smsEntrada1') {
         this.mensajeSmsEntradaSms1= event.borrar;
+      }
+      if (event.ideSmsUnica === 'smsEntrada2') {
+        this.mensajeSmsEntradaSms2= event.borrar;
       }
       if (event.ideSmsUnica === 'smsEventos') {
         this.mensajeSmsEventosPersonas= event.borrar;
@@ -140,22 +153,39 @@ export class InicioflujoComponent implements OnInit, OnDestroy{
       if (event.ideSmsUnica === 'smsEventos1') {
         this.mensajeSmsEventosPersonas1= event.borrar;
       }
+      if (event.ideSmsUnica === 'smsEventos2') {
+        this.mensajeSmsEventosPersonas2= event.borrar;
+      }
     }
 
     if (event.tipo === 2) {
+
       
       if (event.ideSmsUnica === 'smsUnica') {
         this.mensajeSmsAudienciaUnica1 = event.crearSms;
       }
+      if (event.ideSmsUnica === 'smsUnica1') {
+        this.mensajeSmsAudienciaUnica2 = event.crearSms;
+      }
       if (event.ideSmsUnica === 'smsEntrada') {
         this.mensajeSmsEntradaSms1= event.crearSms;
+      }
+      if (event.ideSmsUnica === 'smsEntrada1') {
+        this.mensajeSmsEntradaSms2= event.crearSms;
       }
       if (event.ideSmsUnica === 'smsEventos') {
         this.mensajeSmsEventosPersonas1= event.crearSms;
       }
+      if (event.ideSmsUnica === 'smsEventos1') {
+        this.mensajeSmsEventosPersonas2= event.crearSms;
+      }
       
     }   
   }
+
+
+
+
 
   getTags() {
     this.tagSusbcribe =  this.Servicio.getTags().subscribe(

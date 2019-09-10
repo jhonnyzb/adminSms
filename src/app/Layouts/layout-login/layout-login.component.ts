@@ -65,7 +65,7 @@ export class LayoutLoginComponent implements OnInit {
        }
 
       }, (erro) => {
-        
+        this.router.navigate(['usuario'])
         this.loader = false;
         this.toastrService.error('Conexion no autorizada ', 'Error', {
           timeOut: 1500, positionClass: 'toast-top-right', progressBar: true, progressAnimation: 'decreasing'
